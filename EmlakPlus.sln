@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmlakPlus.WEBUI", "EmlakPlu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmlakPlus.Entity", "EmlakPlus.Entity\EmlakPlus.Entity.csproj", "{663E54CF-59AE-431C-90E4-1FA38EA26D64}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmlakPlus.DAL", "EmlakPlus.DAL\EmlakPlus.DAL.csproj", "{3C6E612D-D303-4F5B-8496-83AA0C497474}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmlakPlus.BLL", "EmlakPlus.BLL\EmlakPlus.BLL.csproj", "{7216E3F0-BBCA-4E9C-8AD4-181C57D025A1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{663E54CF-59AE-431C-90E4-1FA38EA26D64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{663E54CF-59AE-431C-90E4-1FA38EA26D64}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{663E54CF-59AE-431C-90E4-1FA38EA26D64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C6E612D-D303-4F5B-8496-83AA0C497474}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C6E612D-D303-4F5B-8496-83AA0C497474}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C6E612D-D303-4F5B-8496-83AA0C497474}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C6E612D-D303-4F5B-8496-83AA0C497474}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7216E3F0-BBCA-4E9C-8AD4-181C57D025A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7216E3F0-BBCA-4E9C-8AD4-181C57D025A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7216E3F0-BBCA-4E9C-8AD4-181C57D025A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7216E3F0-BBCA-4E9C-8AD4-181C57D025A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
