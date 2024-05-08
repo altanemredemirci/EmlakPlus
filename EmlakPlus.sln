@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmlakPlus.WEBUI", "EmlakPlus.WEBUI\EmlakPlus.WEBUI.csproj", "{B6683398-90CB-4F9C-B919-3B3A04BD23F2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B6683398-90CB-4F9C-B919-3B3A04BD23F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6683398-90CB-4F9C-B919-3B3A04BD23F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6683398-90CB-4F9C-B919-3B3A04BD23F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6683398-90CB-4F9C-B919-3B3A04BD23F2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0B32C7CB-A325-4D94-B2D2-F06A9DB37E8E}
+	EndGlobalSection
+EndGlobal
