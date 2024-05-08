@@ -1,8 +1,18 @@
+using EmlakPlus.BLL.Abstract;
+using EmlakPlus.BLL.Concrete;
+using EmlakPlus.DAL.Abstract;
+using EmlakPlus.DAL.Concrete.EfCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+
+//Dependency Injection
+
+builder.Services.AddScoped<IProductService, ProductManager>();   //AddScope<>, AddTransient<>, AddSingleton<> farkýný öðrenin.
+builder.Services.AddScoped<IProductDal, EfCoreProductDal>();
 
 var app = builder.Build();
 
