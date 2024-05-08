@@ -5,6 +5,8 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmlakPlus.WEBUI", "EmlakPlus.WEBUI\EmlakPlus.WEBUI.csproj", "{B6683398-90CB-4F9C-B919-3B3A04BD23F2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmlakPlus.Entity", "EmlakPlus.Entity\EmlakPlus.Entity.csproj", "{663E54CF-59AE-431C-90E4-1FA38EA26D64}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{B6683398-90CB-4F9C-B919-3B3A04BD23F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6683398-90CB-4F9C-B919-3B3A04BD23F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6683398-90CB-4F9C-B919-3B3A04BD23F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{663E54CF-59AE-431C-90E4-1FA38EA26D64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{663E54CF-59AE-431C-90E4-1FA38EA26D64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{663E54CF-59AE-431C-90E4-1FA38EA26D64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{663E54CF-59AE-431C-90E4-1FA38EA26D64}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
