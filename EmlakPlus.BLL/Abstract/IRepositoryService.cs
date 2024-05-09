@@ -6,11 +6,11 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EmlakPlus.DAL.Abstract
+namespace EmlakPlus.BLL.Abstract
 {
-    public interface IRepository<T> where T:class
+    public interface IRepositoryService<T> where T:class
     {
-        List<T> GetAll(Expression<Func<T,bool>> filter);
+        List<T> GetAll(Expression<Func<T,bool>> filter=null);
         T GetById(int id);
 
         void Create(T entity);

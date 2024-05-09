@@ -4,6 +4,7 @@ using EmlakPlus.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,9 +29,9 @@ namespace EmlakPlus.BLL.Concrete
             _productDal.Delete(entity);
         }
 
-        public List<Product> GetAll()
+        public List<Product> GetAll(Expression<Func<Product, bool>> filter)
         {
-            return _productDal.GetAll();
+            return _productDal.GetAll(filter);
         }
 
         public Product GetById(int id)

@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,11 +31,13 @@ namespace EmlakPlus.DAL.Concrete.EfCore
             }
         }
 
-        public List<T> GetAll()
+        public List<T> GetAll(Expression<Func<T, bool>> filter)
         {
             using (var context = new TContext())
             {
-                return context.Set<T>().ToList();
+                return filter == null
+                    ? context.Set<T>().ToList()
+                    : context.Set<T>().Where(filter).ToList(); //filter: i=> i.CityId==1
             }
         }
 
