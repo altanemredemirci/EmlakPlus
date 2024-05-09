@@ -1,4 +1,6 @@
-﻿using EmlakPlus.BLL.Abstract;
+﻿using AutoMapper;
+using EmlakPlus.BLL.Abstract;
+using EmlakPlus.BLL.DTOs.SliderDTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmlakPlus.WEBUI.ViewComponents.Home
@@ -6,15 +8,17 @@ namespace EmlakPlus.WEBUI.ViewComponents.Home
     public class _HomeHeaderViewComponentPartial:ViewComponent
     {
         private readonly ISliderService _sliderService;
+        private readonly IMapper _mapper;
 
-        public _HomeHeaderViewComponentPartial(ISliderService sliderService)
+        public _HomeHeaderViewComponentPartial(ISliderService sliderService,IMapper mapper)
         {
             _sliderService = sliderService;
+            _mapper = mapper;
         }
 
         public IViewComponentResult Invoke()
         {
-            return View(_sliderService.GetAll().FirstOrDefault(i => i.Page == "Index"));
+            return View(_mapper.Map<ResultSliderDTO>(_sliderService.GetAll().FirstOrDefault(i => i.Page == "Index")));
         }
     }
 }

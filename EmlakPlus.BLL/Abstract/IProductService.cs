@@ -9,6 +9,6 @@ namespace EmlakPlus.BLL.Abstract
 {
     public interface IProductService : IRepositoryService<Product>
     {
-        
+        List<Product> GetPopularAll();
     }
 }

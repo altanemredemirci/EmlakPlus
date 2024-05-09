@@ -2,12 +2,13 @@ using EmlakPlus.BLL.Abstract;
 using EmlakPlus.BLL.Concrete;
 using EmlakPlus.DAL.Abstract;
 using EmlakPlus.DAL.Concrete.EfCore;
+using EmlakPlus.WEBUI.Mapping;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddAutoMapper(typeof(MapProfile));
 
 //Dependency Injection
 

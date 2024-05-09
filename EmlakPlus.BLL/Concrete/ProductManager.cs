@@ -39,6 +39,11 @@ namespace EmlakPlus.BLL.Concrete
             return _productDal.GetById(id);
         }
 
+        public List<Product> GetPopularAll()
+        {
+            return _productDal.GetPopularAll();
+        }
+
         public void Update(Product entity)
         {
             _productDal.Update(entity);

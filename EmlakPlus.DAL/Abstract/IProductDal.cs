@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace EmlakPlus.DAL.Abstract
 {
-    public interface IProductDal:IRepository<Product>
+    public interface IProductDal : IRepository<Product>
     {
+        List<Product> GetPopularAll();
     }
 }

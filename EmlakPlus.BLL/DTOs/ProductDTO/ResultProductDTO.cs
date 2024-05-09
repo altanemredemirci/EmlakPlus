@@ -1,18 +1,19 @@
-﻿using System;
+﻿using EmlakPlus.Entity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EmlakPlus.Entity
+namespace EmlakPlus.BLL.DTOs.ProductDTO
 {
-    public class Product
+    public class ResultProductDTO
     {
         public int Id { get; set; }
 
         [StringLength(100)]
-        public string Title  { get; set; }
+        public string Title { get; set; }
 
         public decimal Price { get; set; }
 
@@ -27,10 +28,6 @@ namespace EmlakPlus.Entity
 
         [StringLength(10)]
         public string Type { get; set; }
-
-        public bool Status { get; set; }
-
-        public bool IsPopular { get; set; }
 
         public int CityId { get; set; }
         public City City { get; set; }
