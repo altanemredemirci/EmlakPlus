@@ -11,8 +11,11 @@ builder.Services.AddControllersWithViews();
 
 //Dependency Injection
 
-builder.Services.AddScoped<IProductService, ProductManager>();   //AddScope<>, AddTransient<>, AddSingleton<> farkýný öðrenin.
+builder.Services.AddScoped<IProductService, ProductManager>();   
 builder.Services.AddScoped<IProductDal, EfCoreProductDal>();
+
+builder.Services.AddScoped<IProductTypeService, ProductTypeManager>();
+builder.Services.AddScoped<IProductTypeDal, EfCoreProductTypeDal>();
 
 var app = builder.Build();
 
