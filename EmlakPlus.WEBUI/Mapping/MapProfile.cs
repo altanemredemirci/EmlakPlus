@@ -2,6 +2,7 @@
 using EmlakPlus.BLL.DTOs.ProductDTO;
 using EmlakPlus.BLL.DTOs.ProductTypeDTO;
 using EmlakPlus.BLL.DTOs.SliderDTO;
+using EmlakPlus.BLL.DTOs.WhoWeAreDTO;
 using EmlakPlus.Entity;
 
 namespace EmlakPlus.WEBUI.Mapping
@@ -13,6 +14,7 @@ namespace EmlakPlus.WEBUI.Mapping
             CreateMap<Product, ResultProductDTO>().ReverseMap();
             CreateMap<ProductType, ResultProductTypeDTO>().ReverseMap();
             CreateMap<Slider, ResultSliderDTO>().ReverseMap();
+            CreateMap<WhoWeAre, ResultWhoWeAreDTO>().ReverseMap();
         }
     }
 }
