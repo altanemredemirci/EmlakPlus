@@ -24,6 +24,8 @@ builder.Services.AddScoped<ISliderDal, EfCoreSliderDal>();
 builder.Services.AddScoped<IWhoWeAreService, WhoWeAreManager>();
 builder.Services.AddScoped<IWhoWeAreDal, EfCoreWhoWeAreDal>();
 
+builder.Services.AddScoped<IAgencyService, AgencyManager>();
+builder.Services.AddScoped<IAgencyDal, EfCoreAgencyDal>();
 
 var app = builder.Build();
 
