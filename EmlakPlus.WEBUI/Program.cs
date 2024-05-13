@@ -27,6 +27,10 @@ builder.Services.AddScoped<IWhoWeAreDal, EfCoreWhoWeAreDal>();
 builder.Services.AddScoped<IAgencyService, AgencyManager>();
 builder.Services.AddScoped<IAgencyDal, EfCoreAgencyDal>();
 
+builder.Services.AddScoped<IClientService, ClientManager>();
+builder.Services.AddScoped<IClientDal, EfCoreClientDal>();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

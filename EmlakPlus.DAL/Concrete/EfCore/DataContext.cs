@@ -24,5 +24,6 @@ namespace EmlakPlus.DAL.Concrete.EfCore
         public DbSet<Slider> Sliders { get; set; }
         public DbSet<WhoWeAre> WhoWeAres { get; set; }
         public DbSet<Employment> Employments { get; set; }
+        public DbSet<Client> Clients { get; set; }
     }
 }
