@@ -30,6 +30,8 @@ builder.Services.AddScoped<IAgencyDal, EfCoreAgencyDal>();
 builder.Services.AddScoped<IClientService, ClientManager>();
 builder.Services.AddScoped<IClientDal, EfCoreClientDal>();
 
+builder.Services.AddScoped<IContactService, ContactManager>();
+builder.Services.AddScoped<IContactDal, EfCoreContactDal>();
 
 var app = builder.Build();
 
