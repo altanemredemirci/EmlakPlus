@@ -1,0 +1,71 @@
+﻿@model UpdateProductTypeDTO
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <!-- left column -->
+    <div class="col-md-6 offset-md-3">
+        <!-- general form elements -->
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Kategori Güncelle</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            @* <form action="/ProductType/Create" method="post"> *@
+            <form asp-action="Edit" asp-controller="ProductType" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="Id" value="@Model.Id" />
+                <input type="hidden" name="Icon" value="@Model.Icon" />
+                <div class="card-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Name"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <img id="previewImage" src="~/img/@Model.Icon" class="card-img-top" alt="..." style="width:auto">
+                    </div>
+                    <div class="form-group">
+                        <input type="file" id="imageInput" name="file" value="@Model.Icon" accept="image/*" onchange="updateCard()" />
+                        <span asp-validation-for="Icon" class="text-danger"></span>
+                    </div>
+                    <div class="form-check">
+                        <input asp-for="Status" class="form-check-input">
+                        <label asp-for="Status" class="form-check-label">Durum</label>
+                        <span asp-validation-summary="Status" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Güncelle</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.card -->
+    </div>
+
+</div>
+
+<script>
+    function updateCard() {
+        var input = document.getElementById('imageInput');
+        var preview = document.getElementById('previewImage');
+        var file = input.files[0];
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+            preview.src = reader.result;
+        }
+
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = "";
+        }
+
+    }
+</script>
+
+

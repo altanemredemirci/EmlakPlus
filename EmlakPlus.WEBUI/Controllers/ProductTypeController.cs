@@ -10,6 +10,7 @@ using EmlakPlus.Entity;
 using EmlakPlus.BLL.Abstract;
 using AutoMapper;
 using EmlakPlus.BLL.DTOs.ProductTypeDTO;
+using EmlakPlus.WEBUI.Models;
 
 namespace EmlakPlus.WEBUI.Controllers
 {
@@ -29,7 +30,7 @@ namespace EmlakPlus.WEBUI.Controllers
             var productTypes = _productTypeService.GetAll();
             var models = _mapper.Map<List<ResultProductTypeDTO>>(productTypes);
             return View(models);
-        } 
+        }
         //[HttpGet] Default get olarak tanımlıdır.
         public IActionResult Create()
         {
@@ -37,11 +38,28 @@ namespace EmlakPlus.WEBUI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateProductTypeDTO dto, IFormFile file)        
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(CreateProductTypeDTO dto, IFormFile file)
         {
             ModelState.Remove("Icon");
             if (ModelState.IsValid)
             {
+                var productType = _productTypeService.GetAll(i => i.Name == dto.Name);
+
+                if (productType != null)
+                {
+                    ErrorViewModel error = new ErrorViewModel()
+                    {
+                        Code = 101,
+                        Title = "Kayıt Hatası",
+                        Description = "Aynı isimde kayıtlı bir ilan kategorisi vardır. Lütfen farklı isim girişi yapınız.",
+                        ReturnUrl = "/ProductType/Index",
+                        Css = "text-warning"
+                    };
+                    return View("Error", error);
+                }
+
+
                 if (file == null)
                 {
                     ModelState.AddModelError("", "Ikon için dosya yüklenmedi.");
@@ -50,15 +68,8 @@ namespace EmlakPlus.WEBUI.Controllers
 
                 if (file.ContentType == "image/png" || file.ContentType == "image/jpg" || file.ContentType == "image/jpeg")
                 {
-                    string newFileName = GenerateUniqueFileName();
-                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img", newFileName);
 
-                    using (var stream = new FileStream(path, FileMode.Create))
-                    {
-                        await file.CopyToAsync(stream);
-                    }
-
-                    dto.Icon = newFileName;
+                    dto.Icon = await UploadImage(file);
 
                     _productTypeService.Create(_mapper.Map<ProductType>(dto));
                     return RedirectToAction("Index");
@@ -68,16 +79,102 @@ namespace EmlakPlus.WEBUI.Controllers
                 return View(dto);
 
             }
-           
+
             return View(dto);
         }
 
-        private static string GenerateUniqueFileName(string fileExtension =".png")
+        public IActionResult Edit(int id)
+        {
+            var productType = _productTypeService.GetById(id);
+
+            if (productType == null)
+            {
+                ErrorViewModel error = new ErrorViewModel()
+                {
+                    Code = 404,
+                    Title = "İlan Kategorisi Bulunamadı",
+                    Description = "Lütfen seçtiğiniz yapıyı tekrar kontrol ediniz.",
+                    ReturnUrl = "/ProductType/Index",
+                    Css = "text-danger"
+                };
+                return View("Error", error);
+            }
+
+            return View(_mapper.Map<UpdateProductTypeDTO>(productType));
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(UpdateProductTypeDTO dto, IFormFile file)
+        {
+
+            if (ModelState.IsValid)
+            {
+                if (file != null)
+                {
+                    DeleteImage(dto.Icon);
+
+                    dto.Icon = await UploadImage(file);
+                }
+
+                _productTypeService.Update(_mapper.Map<ProductType>(dto));
+                return RedirectToAction("Index");
+
+            }
+            return View(dto);
+        }
+
+        public IActionResult Delete(int id)
+        {
+            var productType = _productTypeService.GetById(id);
+
+            if (productType == null)
+            {
+                ErrorViewModel error = new ErrorViewModel()
+                {
+                    Code = 404,
+                    Title = "İlan Kategorisi Bulunamadı",
+                    Description = "Lütfen seçtiğiniz yapıyı tekrar kontrol ediniz.",
+                    ReturnUrl = "/ProductType/Index",
+                    Css = "text-danger"
+                };
+                return View("Error", error);
+            }
+
+            _productTypeService.Delete(productType);
+            return RedirectToAction("Index");
+        }
+
+
+
+        private static string GenerateUniqueFileName(string fileExtension = ".png")
         {
             var timestamp = DateTime.Now.ToString("yyyyMMddHHmmssfff");
             var uniqueName = $"{timestamp}{fileExtension}";
 
             return uniqueName;
+        }
+
+        private static async Task<string> UploadImage(IFormFile file)
+        {
+            string newFileName = GenerateUniqueFileName();
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img", newFileName);
+
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+            return newFileName;
+        }
+
+        private static void DeleteImage(string fileName)
+        {
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img", fileName);
+            if (System.IO.File.Exists(path))
+            {
+                System.IO.File.Delete(path);
+            }
         }
     }
 }
