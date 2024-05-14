@@ -1,0 +1,55 @@
+﻿@model List<ResultProductTypeDTO>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Kategori Listesi</h3>
+                <div class="card-tools">
+                    <div class="input-group input-group-sm">
+                        <a href="/ProductType/Create" class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-plus"></i> Yeni Kategori
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Ikon</th>
+                            <th>Kategori Adı</th>
+                            <th>Durumu</th>
+                            <th>Güncelle</th>
+                            <th>Sil</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var cat in Model)
+                        {
+                            <tr>
+                                <td>@cat.Id</td>
+                                <td><img class="img-fluid" src="~/img/@cat.Icon" alt="Icon"></td>
+                                <td>@cat.Name</td>
+                                <td>@cat.Status</td>
+                                <td><a href="/ProductType/Edit?id=@cat.Id" class="btn btn-outline-warning btn-sm">Güncelle</a></td>
+                                <td><a href="/ProductType/Delete?id=@cat.Id" class="btn btn-outline-danger btn-sm">Sil</a></td>
+                            </tr>
+                        }
+                       
+                      
+                    </tbody>
+                </table>
+              
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
