@@ -1,0 +1,72 @@
+﻿@model List<ResultProductDTO>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Emlak Listesi</h3>
+                <div class="card-tools">
+                    <div class="input-group input-group-sm">
+                        <a href="/Product/Create" class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-plus"></i> Yeni İlan
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Resim</th>
+                            <th>Başlık</th>
+                            <th>Fiyat</th>
+                            <th>Şehir</th>
+                            <th>İlçe</th>
+                            <th>Adres</th>
+                            <th>Durum</th>
+                            <th>Popüler</th>
+                            <th>İlan Türü</th>
+                            <th>Kategori Adı</th>
+                            <th>Acenta Adı</th>
+                            <th>Güncelle</th>
+                            <th>Sil</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var pr in Model)
+                        {
+                            <tr>
+                                <td>@pr.Id</td>
+                                <td><img class="img-fluid" src="~/img/@pr.CoverImage" alt="Icon"></td>
+                                <td>@pr.Title</td>
+                                <td>@pr.Price</td>
+                                <td>@pr.City.Name</td>
+                                <td>@pr.District</td>
+                                <td>@pr.Address</td>
+                                <td>@pr.Status</td>
+                                <td>@pr.IsPopular</td>
+                                <td>@pr.Type</td>
+                                <td>@pr.ProductType.Name</td>
+                                <td>@pr.Agency.Name</td>
+                                <td><a href="/Product/Edit?id=@pr.Id" class="btn btn-outline-warning">Güncelle</a></td>
+                                <td><a href="/Product/Delete?id=@pr.Id" class="btn btn-outline-danger">Sil</a></td>
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
+

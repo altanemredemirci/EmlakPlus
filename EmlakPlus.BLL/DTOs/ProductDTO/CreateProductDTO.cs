@@ -8,10 +8,8 @@ using System.Threading.Tasks;
 
 namespace EmlakPlus.BLL.DTOs.ProductDTO
 {
-    public class ResultProductDTO
+    public class CreateProductDTO
     {
-        public int Id { get; set; }
-
         [StringLength(100)]
         public string Title { get; set; }
 
