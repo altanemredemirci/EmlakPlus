@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+@await Component.InvokeAsync("_AdminHeaderViewComponentPartial")
+<body class="hold-transition sidebar-mini">
+    <!-- Site wrapper -->
+    <div class="wrapper">
+        @await Component.InvokeAsync("_AdminNavbarViewComponentPartial")
+
+        @await Component.InvokeAsync("_AdminSidebarViewComponentPartial")       
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+
+                 @RenderBody()
+
+
+                </div><!-- /.container-fluid -->
+            </section>
+        </div>
+        <!-- /.content-wrapper -->
+        @await Component.InvokeAsync("_AdminFooterViewComponentPartial")
+
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
+    @await Component.InvokeAsync("_AdminScriptViewComponentPartial")
+
+</body>
+</html>
