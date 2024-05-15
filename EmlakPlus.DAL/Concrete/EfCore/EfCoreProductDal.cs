@@ -16,7 +16,11 @@ namespace EmlakPlus.DAL.Concrete.EfCore
         {
             using (var context = new DataContext())
             {
-                return context.Products.Where(i => i.Status == true).Include(i => i.ProductType).Include(i => i.City).Include(i=> i.Agency).ToList();
+                var products = context.Products.Include(i => i.ProductType).Include(i => i.City).Include(i => i.Agency).AsQueryable();
+
+                return filter != null
+                    ? products.Where(filter).ToList()
+                    : products.ToList();
             }
         }
 

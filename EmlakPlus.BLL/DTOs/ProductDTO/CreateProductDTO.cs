@@ -32,12 +32,9 @@ namespace EmlakPlus.BLL.DTOs.ProductDTO
         public bool IsPopular { get; set; }
 
         public int CityId { get; set; }
-        public City City { get; set; }
 
         public int ProductTypeId { get; set; }
-        public ProductType ProductType { get; set; }
 
         public int AgencyId { get; set; }
-        public Agency Agency { get; set; }
     }
 }

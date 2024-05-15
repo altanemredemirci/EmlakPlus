@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
+using EmlakPlus.BLL;
 using EmlakPlus.BLL.Abstract;
 using EmlakPlus.BLL.DTOs.ProductDTO;
+using EmlakPlus.Entity;
 using Microsoft.AspNetCore.Mvc;
+using System.Drawing;
 
 namespace EmlakPlus.WEBUI.Controllers
 {
@@ -33,6 +36,47 @@ namespace EmlakPlus.WEBUI.Controllers
             ViewBag.ProductTypes = _productTypeService.GetAll();
             ViewBag.Agencies = _agencyService.GetAll();
             return View(new CreateProductDTO());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(CreateProductDTO dto, IFormFile file)
+        {
+            ModelState.Remove("CoverImage");
+            if (ModelState.IsValid)
+            {
+                if (file == null)
+                {
+                    ViewBag.Cities = _cityService.GetAll();
+                    ViewBag.ProductTypes = _productTypeService.GetAll();
+                    ViewBag.Agencies = _agencyService.GetAll();
+                    ModelState.AddModelError("", "Ikon için dosya yüklenmedi.");
+                    return View(dto);
+                }
+
+                dto.CoverImage = await ImageMethods.UploadImage(file);
+
+                _productService.Create(_mapper.Map<Product>(dto));
+
+                return RedirectToAction("Index");
+
+            }
+
+            ViewBag.Cities = _cityService.GetAll();
+            ViewBag.ProductTypes = _productTypeService.GetAll();
+            ViewBag.Agencies = _agencyService.GetAll();
+            return View(dto);
+        }
+
+        public IActionResult StatusChange(int id)
+        {
+            var product = _productService.GetById(id);
+
+            product.Status = product.Status == true ? false : true;
+
+            _productService.Update(product);
+
+            return RedirectToAction("Index");
         }
     }
 }

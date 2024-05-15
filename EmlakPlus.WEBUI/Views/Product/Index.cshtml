@@ -28,12 +28,12 @@
                             <th>Fiyat</th>
                             <th>Şehir</th>
                             <th>İlçe</th>
-                            <th>Adres</th>
-                            <th>Durum</th>
+                            <th>Adres</th>                           
                             <th>Popüler</th>
                             <th>İlan Türü</th>
                             <th>Kategori Adı</th>
                             <th>Acenta Adı</th>
+                            <th>Durum</th>
                             <th>Güncelle</th>
                             <th>Sil</th>
                         </tr>
@@ -48,12 +48,23 @@
                                 <td>@pr.Price</td>
                                 <td>@pr.City.Name</td>
                                 <td>@pr.District</td>
-                                <td>@pr.Address</td>
-                                <td>@pr.Status</td>
+                                <td>@pr.Address</td>                                
                                 <td>@pr.IsPopular</td>
                                 <td>@pr.Type</td>
                                 <td>@pr.ProductType.Name</td>
                                 <td>@pr.Agency.Name</td>
+                                <td>
+                                    @if (pr.Status == true)
+                                    {
+                                        <a href="/Product/StatusChange?id=@pr.Id" class="btn btn-outline-warning">Pasif Et</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="/Product/StatusChange?id=@pr.Id" class="btn btn-outline-success">Aktif Et</a>
+                                    }
+                                </td>
+
+
                                 <td><a href="/Product/Edit?id=@pr.Id" class="btn btn-outline-warning">Güncelle</a></td>
                                 <td><a href="/Product/Delete?id=@pr.Id" class="btn btn-outline-danger">Sil</a></td>
                             </tr>

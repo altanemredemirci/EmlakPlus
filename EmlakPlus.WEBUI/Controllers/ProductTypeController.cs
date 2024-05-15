@@ -11,6 +11,7 @@ using EmlakPlus.BLL.Abstract;
 using AutoMapper;
 using EmlakPlus.BLL.DTOs.ProductTypeDTO;
 using EmlakPlus.WEBUI.Models;
+using EmlakPlus.BLL;
 
 namespace EmlakPlus.WEBUI.Controllers
 {
@@ -69,7 +70,7 @@ namespace EmlakPlus.WEBUI.Controllers
                 if (file.ContentType == "image/png" || file.ContentType == "image/jpg" || file.ContentType == "image/jpeg")
                 {
 
-                    dto.Icon = await UploadImage(file);
+                    dto.Icon = await ImageMethods.UploadImage(file);
 
                     _productTypeService.Create(_mapper.Map<ProductType>(dto));
                     return RedirectToAction("Index");
@@ -113,9 +114,9 @@ namespace EmlakPlus.WEBUI.Controllers
             {
                 if (file != null)
                 {
-                    DeleteImage(dto.Icon);
+                    ImageMethods.DeleteImage(dto.Icon);
 
-                    dto.Icon = await UploadImage(file);
+                    dto.Icon = await ImageMethods.UploadImage(file);
                 }
 
                 _productTypeService.Update(_mapper.Map<ProductType>(dto));
@@ -148,33 +149,6 @@ namespace EmlakPlus.WEBUI.Controllers
 
 
 
-        private static string GenerateUniqueFileName(string fileExtension = ".png")
-        {
-            var timestamp = DateTime.Now.ToString("yyyyMMddHHmmssfff");
-            var uniqueName = $"{timestamp}{fileExtension}";
-
-            return uniqueName;
-        }
-
-        private static async Task<string> UploadImage(IFormFile file)
-        {
-            string newFileName = GenerateUniqueFileName();
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img", newFileName);
-
-            using (var stream = new FileStream(path, FileMode.Create))
-            {
-                await file.CopyToAsync(stream);
-            }
-            return newFileName;
-        }
-
-        private static void DeleteImage(string fileName)
-        {
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img", fileName);
-            if (System.IO.File.Exists(path))
-            {
-                System.IO.File.Delete(path);
-            }
-        }
+      
     }
 }
