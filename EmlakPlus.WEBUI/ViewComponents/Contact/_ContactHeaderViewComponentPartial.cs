@@ -18,7 +18,7 @@ namespace EmlakPlus.WEBUI.ViewComponents.Contact
 
         public IViewComponentResult Invoke()
         {
-            return View(_mapper.Map<ResultSliderDTO>(_sliderService.GetAll(i => i.Page == "Contact")));
+            return View(_mapper.Map<ResultSliderDTO>(_sliderService.GetOne(i => i.Page == "Contact")));
         }
     }
 }

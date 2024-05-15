@@ -20,7 +20,17 @@ namespace EmlakPlus.BLL.Concrete
             _sliderDal = sliderDal;
         }
 
-        public Slider GetAll(Expression<Func<Slider, bool>> filter)
+        public Slider GetOne(Expression<Func<Slider, bool>> filter = null)
+        {
+            return _sliderDal.GetOne(filter);
+        }
+
+        public void Update(Slider entity)
+        {
+            _sliderDal.Update(entity);
+        }
+
+        List<Slider> ISliderService.GetAll(Expression<Func<Slider, bool>> filter=null)
         {
             return _sliderDal.GetAll(filter);
         }

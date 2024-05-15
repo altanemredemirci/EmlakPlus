@@ -10,6 +10,9 @@ namespace EmlakPlus.DAL.Abstract
 {
     public interface ISliderDal
     {
-        Slider GetAll(Expression<Func<Slider, bool>> filter);
+        List<Slider> GetAll(Expression<Func<Slider, bool>> filter);
+        Slider GetOne(Expression<Func<Slider, bool>> filter);
+
+        void Update(Slider entity);
     }
 }

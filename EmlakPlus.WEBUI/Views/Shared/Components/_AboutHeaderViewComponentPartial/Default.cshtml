@@ -11,9 +11,18 @@
         </div>
         <div class="col-md-6 animated fadeIn">
             <div class="owl-carousel header-carousel">
-                <div class="owl-carousel-item">
-                    <img class="img-fluid" src="~/img/@Model.ImageUrl1" alt="">
-                </div>               
+                @if (Model.ImageUrl1 != null)
+                {
+                    <div class="owl-carousel-item">
+                        <img class="img-fluid" src="~/img/@Model.ImageUrl1" alt="">
+                    </div>
+                }
+                @if (Model.ImageUrl2 != null)
+                {
+                    <div class="owl-carousel-item">
+                        <img class="img-fluid" src="~/img/@Model.ImageUrl2" alt="">
+                    </div>
+                }
             </div>
         </div>
     </div>

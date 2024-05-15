@@ -2,6 +2,7 @@
 using EmlakPlus.BLL;
 using EmlakPlus.BLL.Abstract;
 using EmlakPlus.BLL.DTOs.AgencyDTO;
+using EmlakPlus.BLL.DTOs.ProductDTO;
 using EmlakPlus.DAL.Abstract;
 using EmlakPlus.Entity;
 using EmlakPlus.WEBUI.Models;
@@ -70,6 +71,98 @@ namespace EmlakPlus.WEBUI.Controllers
             }
             return View(dto);
         }
+
+        public ActionResult Edit(int id)
+        {
+            if (id < 1)
+            {
+                ErrorViewModel error = new ErrorViewModel()
+                {
+                    Code = 102,
+                    Title = "Acenta Bulunamadı",
+                    Description = "Lütfen varolan bir acenta seçiniz.",
+                    ReturnUrl = "/Agency/Index",
+                    Css = "text-danger"
+                };
+                return View("Error", error);
+            }
+
+            var agency = _agencyService.GetById(id);
+
+            if (agency == null)
+            {
+                ErrorViewModel error = new ErrorViewModel()
+                {
+                    Code = 102,
+                    Title = "Acenta Bulunamadı",
+                    Description = "Lütfen varolan bir acenta seçiniz.",
+                    ReturnUrl = "/Agency/Index",
+                    Css = "text-danger"
+                };
+                return View("Error", error);
+            }
+            var model = _mapper.Map<UpdateAgencyDTO>(agency);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(UpdateAgencyDTO dto, IFormFile file)
+        {
+            ModelState.Remove("ImageUrl");
+            if (ModelState.IsValid)
+            {
+                var agency = _agencyService.GetById(dto.Id);
+
+                if (agency == null)
+                {
+                    ErrorViewModel error = new ErrorViewModel()
+                    {
+                        Code = 102,
+                        Title = "Acenta Bulunamadı",
+                        Description = "Lütfen varolan bir acenta seçiniz.",
+                        ReturnUrl = "/Agency/Index",
+                        Css = "text-danger"
+                    };
+                    return View("Error", error);
+                }
+
+                if (file != null)
+                {
+                    ImageMethods.DeleteImage(agency.ImageUrl);
+                    dto.ImageUrl = await ImageMethods.UploadImage(file);
+                }
+
+                _agencyService.Update(_mapper.Map<Agency>(dto));
+                return RedirectToAction("Index");
+            }         
+            return View(dto);
+        }
+
+        public IActionResult Delete(int id)
+        {
+            var agency = _agencyService.GetById(id);
+
+            if (agency == null)
+            {
+                ErrorViewModel error = new ErrorViewModel()
+                {
+                    Code = 102,
+                    Title = "Acenta Bulunamadı",
+                    Description = "Lütfen varolan bir acenta seçiniz.",
+                    ReturnUrl = "/Agency/Index",
+                    Css = "text-danger"
+                };
+                return View("Error", error);
+            }
+
+            _agencyService.Delete(agency);
+            ImageMethods.DeleteImage(agency.ImageUrl);
+            return RedirectToAction("Index");
+        }
+
+
 
         public IActionResult StatusChange(int id)
         {

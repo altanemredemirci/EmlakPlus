@@ -1,0 +1,62 @@
+﻿@model List<ResultSliderDTO>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Slider Listesi</h3>
+                <div class="card-tools">
+                    <div class="input-group input-group-sm">
+                        <a href="/Slider/Create" class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-plus"></i> Yeni Slider
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Resim1</th>
+                            <th>Resim2</th>
+                            <th>Başlık</th>
+                            <th>Açıklama</th>
+                            <th>Sayfa</th>
+                            <th>Güncelle</th>
+                            <th>Sil</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var pr in Model)
+                        {
+                            <tr>
+                                <td>@pr.Id</td>
+                                <td><img class="img-fluid" src="~/img/@pr.ImageUrl1" alt="Icon"></td>
+                                <td><img class="img-fluid" src="~/img/@pr.ImageUrl2" alt="Icon"></td>
+                                <td>@pr.Title</td>
+                                <td style="text-wrap: wrap;">@pr.Description</td>
+                                <td>@pr.Page</td>                              
+
+
+                                <td><a href="/Slider/Edit?id=@pr.Id" class="btn btn-outline-warning">Güncelle</a></td>
+                                <td><a href="/Slider/Delete?id=@pr.Id" class="btn btn-outline-danger">Sil</a></td>
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
+
