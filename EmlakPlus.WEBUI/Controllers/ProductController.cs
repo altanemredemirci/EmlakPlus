@@ -147,7 +147,27 @@ namespace EmlakPlus.WEBUI.Controllers
         }
 
 
+        public IActionResult Delete(int id)
+        {
+            var product = _productService.GetById(id);
 
+            if (product == null)
+            {
+                ErrorViewModel error = new ErrorViewModel()
+                {
+                    Code = 102,
+                    Title = "İlan Bulunamadı",
+                    Description = "Lütfen varolan bir ilanı seçiniz.",
+                    ReturnUrl = "/Product/Index",
+                    Css = "text-danger"
+                };
+                return View("Error", error);
+            }
+
+            _productService.Delete(product);
+            ImageMethods.DeleteImage(product.CoverImage);
+            return RedirectToAction("Index");
+        }
 
 
         public IActionResult StatusChange(int id)
