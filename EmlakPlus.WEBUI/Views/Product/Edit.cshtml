@@ -1,0 +1,162 @@
+﻿@model UpdateProductDTO
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- general form elements -->
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Yeni İlan</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form asp-controller="Product" asp-action="Edit" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="Id" value="@Model.Id" />
+                <input type="hidden" name="CoverImage" value="@Model.CoverImage" />
+                <div class="card-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Title"></label>
+                                <input asp-for="Title" class="form-control" />
+                                <span asp-validation-for="Title" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Price"></label>
+                                <input asp-for="Price" class="form-control" />
+                                <span asp-validation-for="Price" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="CityId"></label>
+                                <select class="form-control select2" style="width: 100%;" asp-for="CityId">
+                                    <option value="">-- İl Seçiniz --</option>
+                                    @foreach (var item in ViewBag.Cities) // ViewBag ya da Model'den gelen veriye göre düzenleyin
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="District"></label>
+                                <select class="form-control select2" style="width: 100%;" asp-for="District">
+                                    <option value="@Model.District">@Model.District</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Address"></label>
+                                <textarea class="form-control" rows="3" placeholder="Adres Giriniz.." asp-for="@Model.Address">@Model.Address</textarea>
+                                <span asp-validation-for="Address" class="text-danger"></span>
+                            </div>
+
+                            <label asp-for="Type"></label>
+                            <div class="d-flex">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="Type" id="radioSatilik" value="Satılık" @(Model.Type=="Satılık" ? "checked":"")>
+                                    <label class="form-check-label" for="radioSatilik">Satılık</label>
+                                </div>
+                                <div class="form-check ml-3">
+                                    <input class="form-check-input" type="radio" name="Type" id="radioKiralik" value="Kiralık" @(Model.Type == "Kiralık" ? "checked" : "")>
+                                    <label class="form-check-label" for="radioKiralik">Kiralık</label>
+                                </div>
+                            </div>
+
+                            <label asp-for="IsPopular"></label>
+                            <div class="d-flex">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="IsPopular" value="true" @(Model.IsPopular==true ? "checked" : "")>
+                                    <label class="form-check-label">Popüler</label>
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-group">
+                                <label>ProductType</label>
+                                <select class="form-control select2" style="width: 100%;" asp-for="ProductTypeId">
+                                    <option value="">-- Kategori Seçiniz --</option>
+                                    @foreach (var item in ViewBag.ProductTypes) // ViewBag ya da Model'den gelen veriye göre düzenleyin
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="ProductTypeId" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="AgencyId"></label>
+                                <select class="form-control select2" style="width: 100%;" asp-for="AgencyId">
+                                    <option value="">-- Acenta Seçiniz --</option>
+                                    @foreach (var item in ViewBag.Agencies) // ViewBag ya da Model'den gelen veriye göre düzenleyin
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="AgencyId" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="CoverImage"></label><br />
+                                <img id="previewImage" src="~/img/@Model.CoverImage" class="card-img-top" alt="..." style="max-width:100%">
+                            </div>
+                            <div class="form-group">
+                                <input type="file" id="imageInput" name="file" value="@Model.CoverImage" accept="image/*" onchange="updateCard()" />
+                                <span asp-validation-for="CoverImage" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer text-center">
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Güncelle</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- /.card -->
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        // Şehir seçildiğinde ilçelerin dinamik olarak yüklenmesi
+        $('#CityId').change(function () {
+            var cityId = $(this).val(); // Seçilen şehrin Id'si
+            // AJAX çağrısı
+            $.ajax({
+                url: '/City/GetDistricts',
+                type: 'GET',
+                data: { "cityId": cityId },
+                success: function (data) {
+                    // İlçeleri seçim kutusuna ekleme
+                    var districtsSelect = $('#District');
+                    districtsSelect.empty(); // Önceki ilçeleri temizle
+                    $.each(data, function (index, district) {
+                        districtsSelect.append($('<option></option>').val(district.name).text(district.name));
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+    });
+    function updateCard() {
+        var input = document.getElementById('imageInput');
+        var preview = document.getElementById('previewImage');
+        var file = input.files[0];
+        var reader = new FileReader();
+        reader.onloadend = function () {
+            preview.src = reader.result;
+        }
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = "";
+        }
+    }
+</script>
+

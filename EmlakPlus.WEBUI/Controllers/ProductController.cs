@@ -3,6 +3,7 @@ using EmlakPlus.BLL;
 using EmlakPlus.BLL.Abstract;
 using EmlakPlus.BLL.DTOs.ProductDTO;
 using EmlakPlus.Entity;
+using EmlakPlus.WEBUI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Drawing;
 
@@ -67,6 +68,87 @@ namespace EmlakPlus.WEBUI.Controllers
             ViewBag.Agencies = _agencyService.GetAll();
             return View(dto);
         }
+
+
+        public IActionResult Edit(int id)
+        {
+            if (id < 1)
+            {
+                ErrorViewModel error = new ErrorViewModel()
+                {
+                    Code = 102,
+                    Title = "İlan Bulunamadı",
+                    Description = "Lütfen varolan bir ilanı seçiniz.",
+                    ReturnUrl = "/Product/Index",
+                    Css = "text-danger"
+                };
+                return View("Error", error);
+            }
+
+            var product = _productService.GetById(id);
+
+            if (product == null)
+            {
+                ErrorViewModel error = new ErrorViewModel()
+                {
+                    Code = 102,
+                    Title = "İlan Bulunamadı",
+                    Description = "Lütfen varolan bir ilanı seçiniz.",
+                    ReturnUrl = "/Product/Index",
+                    Css = "text-danger"
+                };
+                return View("Error", error);
+            }
+
+            var model = _mapper.Map<UpdateProductDTO>(product);
+
+            ViewBag.Cities = _cityService.GetAll();
+            ViewBag.ProductTypes = _productTypeService.GetAll();
+            ViewBag.Agencies = _agencyService.GetAll();
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(UpdateProductDTO dto, IFormFile file) 
+        {
+            if (ModelState.IsValid)
+            {
+                var product = _productService.GetById(dto.Id);
+
+                if (product == null)
+                {
+                    ErrorViewModel error = new ErrorViewModel()
+                    {
+                        Code = 102,
+                        Title = "İlan Bulunamadı",
+                        Description = "Lütfen varolan bir ilanı seçiniz.",
+                        ReturnUrl = "/Product/Index",
+                        Css = "text-danger"
+                    };
+                    return View("Error", error);
+                }
+
+                if (file != null)
+                {
+                    ImageMethods.DeleteImage(product.CoverImage);
+                    dto.CoverImage=await ImageMethods.UploadImage(file);
+                }
+
+                _productService.Update(_mapper.Map<Product>(dto));
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.Cities = _cityService.GetAll();
+            ViewBag.ProductTypes = _productTypeService.GetAll();
+            ViewBag.Agencies = _agencyService.GetAll();
+            return View(dto);
+        }
+
+
+
+
 
         public IActionResult StatusChange(int id)
         {

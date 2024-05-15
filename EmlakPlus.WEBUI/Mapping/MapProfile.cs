@@ -16,6 +16,7 @@ namespace EmlakPlus.WEBUI.Mapping
         {
             CreateMap<Product, ResultProductDTO>().ReverseMap();
             CreateMap<Product, CreateProductDTO>().ReverseMap();
+            CreateMap<Product, UpdateProductDTO>().ReverseMap();
             CreateMap<ProductType, ResultProductTypeDTO>().ReverseMap();
             CreateMap<ProductType, CreateProductTypeDTO>().ReverseMap();
             CreateMap<ProductType, UpdateProductTypeDTO>().ReverseMap();
