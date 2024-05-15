@@ -45,7 +45,7 @@ namespace EmlakPlus.WEBUI.Controllers
             ModelState.Remove("Icon");
             if (ModelState.IsValid)
             {
-                var productType = _productTypeService.GetAll(i => i.Name == dto.Name);
+                var productType = _productTypeService.GetOne(i => i.Name == dto.Name);
 
                 if (productType != null)
                 {

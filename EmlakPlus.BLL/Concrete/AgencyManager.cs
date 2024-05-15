@@ -39,6 +39,11 @@ namespace EmlakPlus.BLL.Concrete
             return _agencyDal.GetById(id);
         }
 
+        public Agency GetOne(Expression<Func<Agency, bool>> filter = null)
+        {
+            return _agencyDal.GetOne(filter);
+        }
+
         public void Update(Agency entity)
         {
             _agencyDal.Update(entity);

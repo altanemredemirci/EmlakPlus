@@ -39,6 +39,11 @@ namespace EmlakPlus.BLL.Concrete
             return _productTypeDal.GetById(id);
         }
 
+        public ProductType GetOne(Expression<Func<ProductType, bool>> filter = null)
+        {
+            return _productTypeDal.GetOne(filter);
+        }
+
         public void Update(ProductType entity)
         {
             _productTypeDal.Update(entity);

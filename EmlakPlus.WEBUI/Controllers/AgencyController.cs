@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
+using EmlakPlus.BLL;
 using EmlakPlus.BLL.Abstract;
 using EmlakPlus.BLL.DTOs.AgencyDTO;
 using EmlakPlus.DAL.Abstract;
+using EmlakPlus.Entity;
+using EmlakPlus.WEBUI.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmlakPlus.WEBUI.Controllers
@@ -24,6 +27,48 @@ namespace EmlakPlus.WEBUI.Controllers
             var model = _mapper.Map<List<ResultAgencyDTO>>(agencies);
 
             return View(model);
+        }
+
+
+        public IActionResult Create()
+        {
+            return View(new CreateAgencyDTO());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(CreateAgencyDTO dto, IFormFile file)
+        {
+            ModelState.Remove("ImageUrl");
+            if (ModelState.IsValid)
+            {
+
+                var agency = _agencyService.GetOne(i => i.Name == dto.Name);
+
+                if (agency!=null)
+                {
+                    ErrorViewModel error = new ErrorViewModel()
+                    {
+                        Code = 101,
+                        Title = "Kayıt Hatası",
+                        Description = "Aynı isimde kayıtlı bir acenta vardır. Lütfen farklı isim girişi yapınız.",
+                        ReturnUrl = "/Agency/Index",
+                        Css = "text-warning"
+                    };
+                    return View("Error", error);
+                }
+                if (file == null)
+                {
+                    ModelState.AddModelError("", "Ikon için dosya yüklenmedi.");
+                    return View(dto);
+                }
+
+                dto.ImageUrl = await ImageMethods.UploadImage(file);
+                _agencyService.Create(_mapper.Map<Agency>(dto));
+
+                return RedirectToAction("Index");
+            }
+            return View(dto);
         }
 
         public IActionResult StatusChange(int id)
