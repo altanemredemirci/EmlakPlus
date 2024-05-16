@@ -80,5 +80,25 @@ namespace EmlakPlus.WEBUI.Controllers
 
             return View(dto);
         }
+
+        public JsonResult ImageRemove(int id, int No)
+        {
+            var slider= _sliderService.GetOne(i => i.Id == id);
+            if (No == 1)
+            {
+                ImageMethods.DeleteImage(slider.ImageUrl1);
+                slider.ImageUrl1 = null;                
+            }
+            else
+            {
+                ImageMethods.DeleteImage(slider.ImageUrl2);
+                slider.ImageUrl2 = null;               
+            }
+
+            _sliderService.Update(slider);          
+
+            return Json(new { data = slider });
+        }
+
     }
 }
