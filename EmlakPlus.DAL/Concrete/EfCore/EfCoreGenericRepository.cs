@@ -41,7 +41,7 @@ namespace EmlakPlus.DAL.Concrete.EfCore
             }
         }
 
-        public T GetById(int id)
+        public virtual T GetById(int id)
         {
             using (var context = new TContext())
             {
@@ -49,7 +49,7 @@ namespace EmlakPlus.DAL.Concrete.EfCore
             }
         }
 
-        public T GetOne(Expression<Func<T, bool>> filter)
+        public virtual T GetOne(Expression<Func<T, bool>> filter)
         {
             using (var context = new TContext())
             {

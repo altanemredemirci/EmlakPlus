@@ -15,6 +15,9 @@ builder.Services.AddAutoMapper(typeof(MapProfile));
 builder.Services.AddScoped<IProductService, ProductManager>();   
 builder.Services.AddScoped<IProductDal, EfCoreProductDal>();
 
+builder.Services.AddScoped<IProductDetailService, ProductDetailManager>();
+builder.Services.AddScoped<IProductDetailDal, EfCoreProductDetailDal>();
+
 builder.Services.AddScoped<IProductTypeService, ProductTypeManager>();
 builder.Services.AddScoped<IProductTypeDal, EfCoreProductTypeDal>();
 

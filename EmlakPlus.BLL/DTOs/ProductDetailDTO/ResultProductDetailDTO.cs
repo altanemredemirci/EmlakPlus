@@ -1,13 +1,14 @@
-﻿using System;
+﻿using EmlakPlus.Entity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EmlakPlus.Entity
+namespace EmlakPlus.BLL.DTOs.ProductDetailDTO
 {
-    public class ProductDetail
+    public class ResultProductDetailDTO
     {
         public int Id { get; set; }
 
