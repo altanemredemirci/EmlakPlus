@@ -14,5 +14,6 @@ namespace EmlakPlus.BLL.Abstract
        Slider GetOne(Expression<Func<Slider, bool>> filter=null);
 
         void Update(Slider entity);
+        void Create(Slider entity);
     }
 }

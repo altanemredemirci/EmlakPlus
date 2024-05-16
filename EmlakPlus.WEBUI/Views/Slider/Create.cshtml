@@ -1,6 +1,6 @@
-﻿@model UpdateSliderDTO
+﻿@model CreateSliderDTO
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
@@ -9,10 +9,7 @@
         <!-- general form elements -->
         <div class="card card-primary">
             <!-- form start -->
-            <form asp-controller="Slider" asp-action="Edit" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="Id" value="@Model.Id" />
-                <input type="hidden" name="ImageUrl1" id="ImageUrl1" value="@Model.ImageUrl1" />
-                <input type="hidden" name="ImageUrl2" id="ImageUrl2" value="@Model.ImageUrl2" />
+            <form asp-controller="Slider" asp-action="Create" method="post" enctype="multipart/form-data">
                 <div class="card-body">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="row">
@@ -33,33 +30,31 @@
                                 <span asp-validation-for="Page" class="text-danger"></span>
                             </div>
                             <div class="card-footer text-center">
-                                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Güncelle</button>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Kaydet</button>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label asp-for="ImageUrl1"></label><br />
-                                <img id="previewImage1" src="~/img/@Model.ImageUrl1" class="card-img-top" alt="..." style="max-width:100%">
+                                <img id="previewImage1" src="" class="card-img-top" alt="..." style="max-width:100%">
                             </div>
                             <div class="form-group">
                                 <input type="file" id="imageInput1" name="file1" value="@Model.ImageUrl1" accept="image/*" onchange="updateCard(1)" />
-                                <button type="button" class="btn btn-danger btn-sm" onclick="RemoveImage(@Model.Id,1)">Resmi Sil</button>
                                 <span asp-validation-for="ImageUrl1" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label asp-for="ImageUrl2"></label><br />
-                                <img id="previewImage2" src="~/img/@Model.ImageUrl2" class="card-img-top" alt="..." style="max-width:100%">
+                                <img id="previewImage2" src="" class="card-img-top" alt="..." style="max-width:100%">
                             </div>
                             <div class="form-group">
                                 <input type="file" id="imageInput2" name="file2" value="@Model.ImageUrl2" accept="image/*" onchange="updateCard(2)" />
-                                <button type="button" class="btn btn-danger btn-sm" onclick="RemoveImage(@Model.Id,2)">Resmi Sil</button>
                                 <span asp-validation-for="ImageUrl2" class="text-danger"></span>
-                            </div>                           
+                            </div>
                         </div>
-                   
-                        <!-- /.card-body -->                      
+
+                        <!-- /.card-body -->
                     </div>
             </form>
         </div>
@@ -68,7 +63,7 @@
     </div>
 </div>
 
-<script>    
+<script>  
     function updateCard(i) {
         var input = document.getElementById('imageInput' + i);
         var preview = document.getElementById('previewImage' + i);
@@ -83,23 +78,7 @@
             preview.src = "";
         }
     }
-    function RemoveImage(id, no) { 
-        $.ajax({
-            url: '/Slider/ImageRemove',
-            type: 'GET',
-            data: { "id": id,"no":no },
-            success: function (data) {
-                var preview = document.getElementById("previewImage"+no)
-                preview.src="~/img/"+data.ImageUrl+no
-
-                var dtoImage= document.getElementById("ImageUrl"+no)
-                dtoImage.value=null
-
-            },
-            error: function (xhr, status, error) {
-                console.error(xhr.responseText);
-            }
-        });
-    }
+   
 </script>
+
 

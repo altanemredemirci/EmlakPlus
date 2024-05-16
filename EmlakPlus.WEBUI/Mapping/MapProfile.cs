@@ -24,6 +24,7 @@ namespace EmlakPlus.WEBUI.Mapping
 
             CreateMap<Slider, ResultSliderDTO>().ReverseMap();
             CreateMap<Slider, UpdateSliderDTO>().ReverseMap();
+            CreateMap<Slider, CreateSliderDTO>().ReverseMap();
 
             CreateMap<WhoWeAre, ResultWhoWeAreDTO>().ReverseMap();
 

@@ -25,6 +25,40 @@ namespace EmlakPlus.WEBUI.Controllers
             return View(_mapper.Map<List<ResultSliderDTO>>(slider));
         }
 
+        public IActionResult Create()
+        {
+            return View(new CreateSliderDTO());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(CreateSliderDTO dto, IFormFile file1, IFormFile file2)
+        {
+            ModelState.Remove("ImageUrl1");
+            ModelState.Remove("ImageUrl2");
+            if (ModelState.IsValid)
+            {
+                if (file1 == null)
+                {
+                    ModelState.AddModelError("", "Slider için en az bir resim yüklenmeli.");
+                    return View(dto);
+                }
+
+                dto.ImageUrl1 = await ImageMethods.UploadImage(file1);
+
+                if (file2 != null)
+                {                    
+                    dto.ImageUrl2 = await ImageMethods.UploadImage(file2);
+                }
+
+                _sliderService.Create(_mapper.Map<Slider>(dto));
+                return RedirectToAction("Index");
+            }
+
+            return View(dto);
+        }
+
+
         public IActionResult Edit(int id)
         {
             var slider = _sliderService.GetOne(i=> i.Id==id);
@@ -80,6 +114,9 @@ namespace EmlakPlus.WEBUI.Controllers
 
             return View(dto);
         }
+
+        
+
 
         public JsonResult ImageRemove(int id, int No)
         {
