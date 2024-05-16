@@ -36,14 +36,6 @@ namespace EmlakPlus.DAL.Concrete.EfCore
             }
         }
 
-        public int ApartmentCount()
-        {
-            using (var context = new DataContext())
-            {
-                return context.ProductTypes.Where(i => i.Name == "Daire").Include(i => i.Products).Count();
-            }
-        }
-
         public decimal AvgProductByRent()
         {
             using (var context = new DataContext())

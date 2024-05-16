@@ -12,7 +12,6 @@ namespace EmlakPlus.BLL.Abstract
         int ActiveProductTypeCount();
         int PassiveProductTypeCount();
         int ProductCount();
-        int ApartmentCount();
         string TopAgencyByProductCount();
         string TopProductTypeByProductCount();
         decimal AvgProductBySale();

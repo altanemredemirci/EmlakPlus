@@ -1,0 +1,222 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+            <div class="inner">
+                <h3>@ViewBag.ProductTypeCount</h3>
+
+                <p>Kategori Sayısı</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-folder"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3>@ViewBag.ActiveProductTypeCount</h3>
+
+                <p>Aktif Kategoriler</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-checkmark-circled"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-warning">
+            <div class="inner">
+                <h3>@ViewBag.PassiveProductTypeCount</h3>
+
+                <p>Pasif Kategoriler</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-close-circled"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-danger">
+            <div class="inner">
+                <h3>@ViewBag.TopProductTypeByProductCount</h3>
+
+                <p>En Popüler Kategori</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-heart"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+            <div class="inner">
+                <h3>@ViewBag.ProductCount</h3>
+
+                <p>İlan Sayısı</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-folder"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3>@ViewBag.CheapestProduct</h3>
+
+                <p>En Ucuz İlan</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-cash"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-warning">
+            <div class="inner">
+                <h3>@ViewBag.AvgProductBySale</h3>
+
+                <p>Ortalama İlan Satış Fiyatı</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-cash"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-danger">
+            <div class="inner">
+                <h3>@ViewBag.AvgProductByRent</h3>
+
+                <p>Ortalama İlan Kiralık Fiyatı</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-cash"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+            <div class="inner">
+                <h3>@ViewBag.TopCityByProductCount</h3>
+
+                <p>En Popüler Şehir</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-home"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3>@ViewBag.DiffrentCityCount</h3>
+
+                <p>Kaç Farklı Şehir</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-help-buoy"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-warning">
+            <div class="inner">
+                <h3>@ViewBag.LastProductPrice</h3>
+
+                <p>Son Eklenen İlan Fiyatı</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-cash"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-danger">
+            <div class="inner">
+                <h3>@ViewBag.TheMostExpensiveProduct</h3>
+
+                <p>En Pahalı İlan</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-cash"></i>
+            </div>
+        </div>
+    </div> 
+
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+            <div class="inner">
+                <h3>@ViewBag.NewestBuildingYear</h3>
+
+                <p>En Yeni Bina Yılı</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-calendar"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3>@ViewBag.OldestBuildingYear</h3>
+
+                <p>En Eski Bina Yılı</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-calendar"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-warning">
+            <div class="inner">
+                <h3>@ViewBag.ActiveAgencyCount</h3>
+
+                <p>Aktif Acentalar</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-person-stalker"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-danger">
+            <div class="inner">
+                <h3>@ViewBag.TopAgencyByProductCount</h3>
+
+                <p>En Popüler Acenta</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-person"></i>
+            </div>
+        </div>
+    </div>
+
+   
+</div>
+

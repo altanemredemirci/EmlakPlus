@@ -27,11 +27,6 @@ namespace EmlakPlus.BLL.Concrete
             return _statisticDal.ActiveProductTypeCount();
         }
 
-        public int ApartmentCount()
-        {
-            return _statisticDal.ApartmentCount();
-        }
-
         public decimal AvgProductByRent()
         {
             return _statisticDal.AvgProductByRent();
