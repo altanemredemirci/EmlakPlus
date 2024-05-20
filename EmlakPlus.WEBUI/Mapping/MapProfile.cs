@@ -2,6 +2,7 @@
 using EmlakPlus.BLL.DTOs.AgencyDTO;
 using EmlakPlus.BLL.DTOs.ClientDTO;
 using EmlakPlus.BLL.DTOs.ContactDTO;
+using EmlakPlus.BLL.DTOs.ProductDetailDTO;
 using EmlakPlus.BLL.DTOs.ProductDTO;
 using EmlakPlus.BLL.DTOs.ProductTypeDTO;
 using EmlakPlus.BLL.DTOs.SliderDTO;
@@ -21,6 +22,9 @@ namespace EmlakPlus.WEBUI.Mapping
             CreateMap<ProductType, ResultProductTypeDTO>().ReverseMap();
             CreateMap<ProductType, CreateProductTypeDTO>().ReverseMap();
             CreateMap<ProductType, UpdateProductTypeDTO>().ReverseMap();
+
+            CreateMap<ProductDetail, ResultProductDetailDTO>().ReverseMap();
+
 
             CreateMap<Slider, ResultSliderDTO>().ReverseMap();
             CreateMap<Slider, UpdateSliderDTO>().ReverseMap();

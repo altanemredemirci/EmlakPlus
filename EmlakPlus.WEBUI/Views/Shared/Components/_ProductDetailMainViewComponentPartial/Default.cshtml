@@ -1,0 +1,190 @@
+﻿@model ResultProductDetailDTO
+
+@{
+    TimeSpan ts = DateTime.Now - Model.PublishDate;
+
+    var gun = ts.Days.ToString();
+}
+<!-- Property Single Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-0 mx-auto gx-5 align-items-end wow slideInRight">
+            <ul class="nav nav-pills d-inline-flex justify-content-start mb-3">
+                <li class="nav-item me-2">
+                    <h6> <span class="badge bg-success">@Model.Product.Type</span></h6>
+                </li>
+                <li class="nav-item me-2">
+                <li> <h6> <span class="badge bg-success"><i class="far fa-clock"></i> @Model.PublishDate.ToString("dd/MM/yyyy")</span></h6> </li>
+                </li>
+            </ul>
+        </div>
+        <div class="row g-0 gx-5 align-items-end">
+            <div class="col-lg-6">
+                <div class="text-start mx-auto mb-3 wow slideInLeft" data-wow-delay="0.1s">
+                    <h1 class="mb-3">İlan Bilgileri</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content">
+            <div id="tab-1" class="tab-pane fade show p-0 active">
+                <div class="row g-4">
+                    <div class="col-lg-8 col-md-12 col-sm-12 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="property-item rounded overflow-hidden">
+                            <div class="position-relative overflow-hidden">
+                                <div id="carouselExampleControls" class="carousel slide"
+                                     data-bs-ride="carousel">
+                                    <div class="carousel-inner">
+                                        @for (int i = 0; i < Model.Images.Count; i++)
+                                        {
+                                            <div class="carousel-item @(i==0 ? "active" :"")">
+                                                <img src="~/img/@Model.Images[i].Url" class="d-block w-100" alt="...">
+                                            </div>
+                                        }
+
+                                    </div>
+                                    <button class="carousel-control-prev" type="button"
+                                            data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button"
+                                            data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+                                </div>
+                                <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">
+                                    @Model.Product.Type
+                                </div>
+                                <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">
+                                    @Model.Product.ProductType.Name
+                                </div>
+                            </div>
+                            <div class="p-4 pb-0">
+                                <h5 class="text-primary mb-3">₺ @Model.Product.Price</h5>
+                                <a class="d-block h5 mb-2" href="">@Model.Product.Title</a>
+                                <p>
+                                    <i class="fa fa-map-marker-alt text-primary me-2"></i>@Model.Product.Address, @Model.Product.District, @Model.Product.City.Name
+                                </p>
+                            </div>
+                            <div class="d-flex border-top">
+                                <small class="flex-fill text-center border-end py-2">
+                                    <i class="fa fa-ruler-combined text-primary me-2"></i>@Model.Size m<sup>2</sup>
+                                </small>
+                                <small class="flex-fill text-center border-end py-2">
+                                    <i class="fa fa-bed text-primary me-2"></i>@Model.BedRoomCount Yatak
+                                </small>
+                                <small class="flex-fill text-center py-2">
+                                    <i class="fa fa-bath text-primary me-2"></i>@Model.BathCount Banyo
+                                </small>
+                            </div>
+                        </div>
+                        <div class="single-post-content mt-3">
+                            <h3 class="post-content-title mb-3">Açıklama</h3>
+                            <p class="mb-4">
+                                @Model.Description
+                            </p>
+                            <div class="property-item p-4 mb-4">
+                                <h3 class="post-content-title mb-4">İlan Detayı</h3>
+                                <ul class="details-list p-0">
+                                    <li><strong>Metrekare :</strong> @Model.Size m<sup>2</sup> </li>
+                                    <li><strong>Oda Sayısı :</strong> @Model.RoomCount </li>
+                                    <li><strong>Yatak Odası :</strong> @Model.BedRoomCount </li>
+                                    <li><strong>Banyo Sayısı :</strong> @Model.BathCount </li>
+                                    <li><strong>Garaj Sayısı :</strong> @Model.GarageSize </li>
+                                    <li><strong>Fiyat :</strong> ₺ @Model.Product.Price </li>
+                                    <li><strong>Yapım Yılı :</strong> @Model.BuildYear </li>
+                                    <li><strong>İlan Tarihi :</strong> @Model.PublishDate.ToString("dd/MM/yyyy") </li>
+                                </ul>
+                            </div>
+
+                            <div class="property-item p-4 mb-4">
+                                <h3 class="post-content-title mb-4">Lokasyon</h3>
+                                <div class="agent-map">
+                                    @Html.Raw(Model.Location)
+                                </div>
+                            </div>
+
+                            <div class="property-item p-4 mb-4">
+                                <h3 class="post-content-title mb-4">Video</h3>
+                                <div class="post-content">
+                                    @Html.Raw(Model.VideoUrl)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Call to Action Start -->
+                    <div class="col-lg-4 col-md-12 col-sm-12 text-center wow fadeInUp" data-wow-delay="0.1s"
+                         style="max-width: 540px;">
+
+                        <div class="row g-0 property-item rounded overflow-hidden">
+                            <div class="sidebar-title p-4">
+                                <h4>Contact an Agent</h4>
+                            </div>
+                            <div class="col-md-4">
+                                <img src="~/img/call-to-action.jpg" class="img-fluid rounded-start  w-100">
+                            </div>
+                            <div class="col-md-8">
+                                <h5 class="card-title">Company realty</h5>
+                                <div class="card-body">
+                                    <div>
+                                        <p>+(12) 324 567 89
+                                        <p>
+                                    </div>
+                                    <div>
+                                        <p>companyrealty@mail.com</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-style w-100">
+                                Request
+                                details
+                            </button>
+                        </div>
+
+                        <div class="row g-0 property-item rounded overflow-hidden mt-5 p-4">
+                            <div class="sidebar-title p-4">
+                                <h4>Popular Post</h4>
+                            </div>
+                            <div class="col-md-4">
+                                <img src="~/img/l2.jpg" class="img-fluid rounded-start  w-80">
+                            </div>
+                            <div class="col-md-8">
+                                <h5 class="card-title">Why we are the best in the business</h5>
+                                <div class="card-body">
+                                    <p>Sep 09, 2020 - 2 comments</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="col-md-4">
+                                <img src="~/img/l1.jpg" class="img-fluid rounded-start  w-80">
+                            </div>
+                            <div class="col-md-8">
+                                <h5 class="card-title">Why we are the best in the business</h5>
+                                <div class="card-body">
+                                    <p>Sep 09, 2020 - 2 comments</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="col-md-4">
+                                <img src="~/img/l3.jpg" class="img-fluid rounded-start  w-100">
+                            </div>
+                            <div class="col-md-8">
+                                <h5 class="card-title">Why we are the best in the business</h5>
+                                <div class="card-body">
+                                    <p>Sep 09, 2020 - 2 comments</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Call to Action End -->
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+<!-- Property List End -->

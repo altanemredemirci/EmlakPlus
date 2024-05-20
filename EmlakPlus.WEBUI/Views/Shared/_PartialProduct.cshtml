@@ -1,5 +1,7 @@
 ﻿@model List<ResultProductDTO>
-
+@{
+    
+}
 <div class="row g-4">
     @foreach (var item in Model)
     {
@@ -23,8 +25,11 @@
             </div>
         </div>
     }
-
-    <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
-        <a class="btn btn-primary py-3 px-5" href="">Daha Fazla İlan</a>
-    </div>
+    @if (ViewBag.Route == null)
+    {
+        <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
+            <a class="btn btn-primary py-3 px-5" href="/Home/ProductList">Daha Fazla İlan</a>
+        </div>
+    }
+  
 </div>

@@ -22,6 +22,8 @@ namespace EmlakPlus.BLL.DTOs.ProductDetailDTO
 
         public byte GarageSize { get; set; }
 
+        public DateTime PublishDate { get; set; }
+
         [StringLength(5)]
         public string BuildYear { get; set; }
 

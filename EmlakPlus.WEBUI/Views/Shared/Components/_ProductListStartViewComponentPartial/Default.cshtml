@@ -1,5 +1,4 @@
 ﻿@model List<ResultProductDTO>
-
 <!-- Property List Start -->
 <div class="container-xxl py-5">
     <div class="container">
@@ -23,10 +22,10 @@
         </div>
         <div class="tab-content">
             <div id="sell" class="tab-pane fade show p-0 active">
-                @Html.Partial("_PartialProduct", Model.Where(i => i.Type == "Satılık").Take(5).ToList())
+                @Html.Partial("_PartialProduct", Model.Where(i => i.Type == "Satılık").ToList())
             </div>
             <div id="rent" class="tab-pane fade show p-0">
-                @Html.Partial("_PartialProduct", Model.Where(i => i.Type == "Kiralık").Take(5).ToList())
+                @Html.Partial("_PartialProduct", Model.Where(i => i.Type == "Kiralık").ToList())
             </div>
         </div>
     </div>

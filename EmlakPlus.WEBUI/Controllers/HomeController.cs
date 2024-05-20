@@ -29,6 +29,12 @@ namespace EmlakPlus.WEBUI.Controllers
 
         public IActionResult ProductDetail(int id)
         {
+            return View(id);
+        }
+
+        public IActionResult ProductList()
+        {
+            ViewBag.Route = "ProductList";
             return View();
         }
     }
