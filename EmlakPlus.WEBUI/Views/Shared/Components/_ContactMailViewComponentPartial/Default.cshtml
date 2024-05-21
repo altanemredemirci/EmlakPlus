@@ -1,34 +1,52 @@
 ﻿<div class="col-md-6">
     <div class="wow fadeInUp" data-wow-delay="0.5s">
-        <p class="mb-4">The contact form is currently inactive. Get a functional and working contact form with Ajax & PHP in a few minutes. Just copy and paste the files, add a little code and you're done. <a href="https://htmlcodex.com/contact-form">Download Now</a>.</p>
-        <form>
+        @if (ViewBag.MailSuccess == true)
+        {
+            <div class="alert alert-success" role="alert">
+                Mail Gönderimi Başarılı.
+            </div>
+
+        }
+        else if (ViewBag.MailSuccess == false)
+        {
+            <div class="alert alert-danger" role="alert">
+                Mail Gönderimi Başarısız
+            </div>
+        }
+        else
+        {
+
+            <p class="mb-4">İlgilendiğiniz emlak konuları hakkında bize ulaştığınız için teşekkür ederiz. Size en kısa sürede dönüş yapmak için buradayız. Lütfen aşağıdaki formu doldurun ve istediğiniz konuda bize sorularınızı veya geri bildirimlerinizi gönderin.</p>
+        }
+
+        <form action="/Home/SendEmail">
             <div class="row g-3">
                 <div class="col-md-6">
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="name" placeholder="Your Name">
-                        <label for="name">Your Name</label>
+                        <input type="text" class="form-control" name="name" placeholder="Your Name">
+                        <label for="name">Ad Soyad</label>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-floating">
-                        <input type="email" class="form-control" id="email" placeholder="Your Email">
-                        <label for="email">Your Email</label>
+                        <input type="email" class="form-control" name="email" placeholder="Your Email">
+                        <label for="email">Email</label>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="subject" placeholder="Subject">
-                        <label for="subject">Subject</label>
+                        <input type="text" class="form-control" name="subject" placeholder="Subject">
+                        <label for="subject">Konu</label>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="form-floating">
-                        <textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 150px"></textarea>
-                        <label for="message">Message</label>
+                        <textarea class="form-control" placeholder="Leave a message here" name="message" style="height: 150px"></textarea>
+                        <label for="message">Mesaj</label>
                     </div>
                 </div>
                 <div class="col-12">
-                    <button class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
+                    <button class="btn btn-primary w-100 py-3" type="submit">Email Gönder</button>
                 </div>
             </div>
         </form>
