@@ -4,9 +4,5 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<div class="row mb-2">
-    <div class="col-sm-6">
-        <h1>Index Page</h1>
-    </div>
-</div>
+@await Component.InvokeAsync("_DashboardStatisticViewComponentPartial")
 
