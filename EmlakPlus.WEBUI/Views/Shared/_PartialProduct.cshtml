@@ -1,6 +1,9 @@
 ﻿@model List<ResultProductDTO>
 @{
-    
+    string ConvertPrice(decimal price)
+    {
+        return Convert.ToInt32(price).ToString("C0");
+    }
 }
 <div class="row g-4">
     @foreach (var item in Model)
@@ -13,7 +16,7 @@
                     <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">@item.ProductType.Name</div>
                 </div>
                 <div class="p-4 pb-0">
-                    <h5 class="text-primary mb-3">$@item.Price</h5>
+                    <h5 class="text-primary mb-3">@ConvertPrice(item.Price)</h5>
                     <a class="d-block h5 mb-2" href="/Home/ProductDetail/@item.Id">@item.Title</a>
                     <p><i class="fa fa-map-marker-alt text-primary me-2"></i>@item.Address, @item.District, İstanbul</p>
                 </div>

@@ -5,30 +5,21 @@
             <div class="icon p-2 me-2">
                 <img class="img-fluid" src="~/img/icon-deal.png" alt="Icon" style="width: 30px; height: 30px;">
             </div>
-            <h1 class="m-0 text-primary">Makaan</h1>
+            <h1 class="m-0 text-primary">Emlak Plus</h1>
         </a>
         <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto">
-                <a href="/Home/Index" class="nav-item nav-link active">Home</a>
-                <a asp-action="About" asp-controller="Home" class="nav-item nav-link">About</a>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Property</a>
-                    <div class="dropdown-menu rounded-0 m-0">
-                        <a href="/Home/productlist" class="dropdown-item">İlanlar</a>
-                        <a href="property-type.html" class="dropdown-item">Property Type</a>
-                        <a href="property-agent.html" class="dropdown-item">Property Agent</a>
-                    </div>
-                </div>
-                <div class="nav-item dropdown">
-                    <a href="/Client/Index" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Client</a>
-                 
-                </div>
-                <a href="/Home/Contact" class="nav-item nav-link">Contact</a>
+                <a href="/Home/Index" class="nav-item nav-link active">Anasayfa</a>
+                <a asp-action="About" asp-controller="Home" class="nav-item nav-link">Hakkımızda</a>
+                <a asp-action="ProductList" asp-controller="Home" class="nav-item nav-link">İlanlar</a>
+                <a asp-action="AgencyList" asp-controller="Home" class="nav-item nav-link">Acentalar</a>
+                <a asp-action="TestimonialList" asp-controller="Home" class="nav-item nav-link">Yorumlar</a>
+                <a asp-action="Contact" asp-controller="Home" class="nav-item nav-link">İletİşİm</a>                
             </div>
-            <a href="" class="btn btn-primary px-3 d-none d-lg-flex">Add Property</a>
+            <a href="" class="btn btn-primary px-3 d-none d-lg-flex">İlan Ver</a>
         </div>
     </nav>
 </div>

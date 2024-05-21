@@ -1,0 +1,20 @@
+﻿@model List<ResultProductDTO>
+<div class="row g-0 property-item rounded overflow-hidden mt-5 p-4">
+    <div class="sidebar-title p-4">
+        <h4>Popular Post</h4>
+    </div>
+    @foreach(var item in Model){
+        <div class="col-md-4">
+            <img src="~/img/@item.CoverImage" class="img-fluid rounded-start  w-80">
+        </div>
+        <div class="col-md-8">
+            <h5 class="card-title">@item.Title</h5>
+            <div class="card-body">
+                <h5 class="text-primary">@Convert.ToInt32(item.Price).ToString("C0")</h5>
+            </div>
+        </div>
+        <hr>
+    }
+   
+   
+</div>

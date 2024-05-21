@@ -1,9 +1,16 @@
 ﻿@model ResultProductDetailDTO
 
 @{
-    TimeSpan ts = DateTime.Now - Model.PublishDate;
+    // TimeSpan ts = DateTime.Now - Model.PublishDate;
 
-    var gun = ts.Days.ToString();
+    // var gun = ts.Days.ToString();
+
+
+    string ConvertPrice(decimal price)
+    {
+        return Convert.ToInt32(price).ToString("C0");
+    }
+
 }
 <!-- Property Single Start -->
 <div class="container-xxl py-5">
@@ -62,7 +69,7 @@
                                 </div>
                             </div>
                             <div class="p-4 pb-0">
-                                <h5 class="text-primary mb-3">₺ @Model.Product.Price</h5>
+                                <h5 class="text-primary mb-3">@ConvertPrice(Model.Product.Price)</h5>
                                 <a class="d-block h5 mb-2" href="">@Model.Product.Title</a>
                                 <p>
                                     <i class="fa fa-map-marker-alt text-primary me-2"></i>@Model.Product.Address, @Model.Product.District, @Model.Product.City.Name
@@ -120,63 +127,29 @@
 
                         <div class="row g-0 property-item rounded overflow-hidden">
                             <div class="sidebar-title p-4">
-                                <h4>Contact an Agent</h4>
+                                <h4>Acenta İletişim</h4>
                             </div>
                             <div class="col-md-4">
-                                <img src="~/img/call-to-action.jpg" class="img-fluid rounded-start  w-100">
+                                <img src="~/img/@Model.Product.Agency.ImageUrl" class="img-fluid rounded-start  w-100">
                             </div>
                             <div class="col-md-8">
-                                <h5 class="card-title">Company realty</h5>
+                                <h5 class="card-title">@Model.Product.Agency.Name</h5>
                                 <div class="card-body">
                                     <div>
-                                        <p>+(12) 324 567 89
+                                        <p>@Model.Product.Agency.Phone
                                         <p>
                                     </div>
                                     <div>
-                                        <p>companyrealty@mail.com</p>
+                                        <p>@Model.Product.Agency.Email</p>
                                     </div>
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary btn-style w-100">
-                                Request
-                                details
+                                Randevu Al
                             </button>
                         </div>
 
-                        <div class="row g-0 property-item rounded overflow-hidden mt-5 p-4">
-                            <div class="sidebar-title p-4">
-                                <h4>Popular Post</h4>
-                            </div>
-                            <div class="col-md-4">
-                                <img src="~/img/l2.jpg" class="img-fluid rounded-start  w-80">
-                            </div>
-                            <div class="col-md-8">
-                                <h5 class="card-title">Why we are the best in the business</h5>
-                                <div class="card-body">
-                                    <p>Sep 09, 2020 - 2 comments</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="col-md-4">
-                                <img src="~/img/l1.jpg" class="img-fluid rounded-start  w-80">
-                            </div>
-                            <div class="col-md-8">
-                                <h5 class="card-title">Why we are the best in the business</h5>
-                                <div class="card-body">
-                                    <p>Sep 09, 2020 - 2 comments</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="col-md-4">
-                                <img src="~/img/l3.jpg" class="img-fluid rounded-start  w-100">
-                            </div>
-                            <div class="col-md-8">
-                                <h5 class="card-title">Why we are the best in the business</h5>
-                                <div class="card-body">
-                                    <p>Sep 09, 2020 - 2 comments</p>
-                                </div>
-                            </div>
-                        </div>
+                        @await Component.InvokeAsync("_ProductDetailPopularProductViewComponentPartial")
                     </div>
                     <!-- Call to Action End -->
                 </div>
