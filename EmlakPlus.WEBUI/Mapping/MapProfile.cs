@@ -25,19 +25,21 @@ namespace EmlakPlus.WEBUI.Mapping
 
             CreateMap<ProductDetail, ResultProductDetailDTO>().ReverseMap();
 
-
             CreateMap<Slider, ResultSliderDTO>().ReverseMap();
             CreateMap<Slider, UpdateSliderDTO>().ReverseMap();
             CreateMap<Slider, CreateSliderDTO>().ReverseMap();
 
             CreateMap<WhoWeAre, ResultWhoWeAreDTO>().ReverseMap();
+            CreateMap<WhoWeAre, UpdateWhoWeAreDTO>().ReverseMap();
 
             CreateMap<Agency, ResultAgencyDTO>().ReverseMap();
             CreateMap<Agency, CreateAgencyDTO>().ReverseMap();
             CreateMap<Agency, UpdateAgencyDTO>().ReverseMap();
 
             CreateMap<Client, ResultClientDTO>().ReverseMap();
+
             CreateMap<Contact, ResultContactDTO>().ReverseMap();
+            CreateMap<Contact, UpdateContactDTO>().ReverseMap();
         }
     }
 }

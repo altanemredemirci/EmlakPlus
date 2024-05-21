@@ -9,5 +9,6 @@ namespace EmlakPlus.BLL.Abstract
 {
     public interface IProductDetailService : IRepositoryService<ProductDetail>
     {
+        List<ProductDetail> Last5Product();
     }
 }

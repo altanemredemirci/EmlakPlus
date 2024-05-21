@@ -20,5 +20,13 @@ namespace EmlakPlus.DAL.Concrete.EfCore
                 return model;
             }
         }
+
+        public List<ProductDetail> Last5Product()
+        {
+            using (var context = new DataContext())
+            {
+                return context.ProductDetail.Include(i => i.Product).ThenInclude(i => i.ProductType).Include(i => i.Product.City).OrderByDescending(i => i.PublishDate).Take(5).ToList();
+            }
+        }
     }
 }

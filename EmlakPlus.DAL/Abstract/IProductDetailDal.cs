@@ -9,6 +9,6 @@ namespace EmlakPlus.DAL.Abstract
 {
     public interface IProductDetailDal:IRepository<ProductDetail>
     {
-
+        List<ProductDetail> Last5Product();
     }
 }

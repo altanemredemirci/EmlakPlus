@@ -44,6 +44,11 @@ namespace EmlakPlus.BLL.Concrete
             return _productDetailDal.GetOne(filter);
         }
 
+        public List<ProductDetail> Last5Product()
+        {
+            return _productDetailDal.Last5Product();
+        }
+
         public void Update(ProductDetail entity)
         {
             _productDetailDal.Update(entity);

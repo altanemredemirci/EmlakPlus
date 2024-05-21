@@ -1,0 +1,50 @@
+﻿@model ResultContactDTO
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">İletişim Bilgileri</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Açıklama</th>
+                            <th>Adres</th>
+                            <th>Telefon</th>
+                            <th>Email</th>
+                            <th>Lokasyon</th>
+                            <th>Güncelle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@Model.Id</td>
+                            <td style="text-wrap: wrap;">@Model.Text"</td>
+                            <td>@Model.Address"</td>
+                            <td>@Model.Phone"</td>
+                            <td>@Model.Email"</td>
+                            <td>@Html.Raw(Model.Location)</td>
+                            
+                            <td><a href="/Contact/Edit?id=@Model.Id" class="btn btn-outline-warning btn-sm">Güncelle</a></td>
+                        </tr>
+
+
+
+                    </tbody>
+                </table>
+
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
+

@@ -14,7 +14,11 @@
                 <p class="mb-4">@Model.Description</p>
                 @foreach (var item in Model.Employments)
                 {
-                    <p><i class="fa fa-check text-primary me-3"></i>@item.Title</p>
+                    if (item.Status)
+                    {
+                        <p><i class="fa fa-check text-primary me-3"></i>@item.Title</p>
+                    }
+                
                 }
                 
                 <a class="btn btn-primary py-3 px-5 mt-3" href="/Home/About">Daha Fazla..</a>

@@ -4,6 +4,7 @@ using EmlakPlus.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,9 +19,9 @@ namespace EmlakPlus.BLL.Concrete
             _whoWeAreDal = whoWeAreDal;
         }
 
-        public WhoWeAre GetOne()
+        public WhoWeAre GetOne(Expression<Func<WhoWeAre, bool>> filter = null)
         {
-            return _whoWeAreDal.GetOne();
+            return _whoWeAreDal.GetOne(filter);
         }
 
         public void Update(WhoWeAre entity)

@@ -1,0 +1,58 @@
+﻿@model List<ResultProductDetailDTO>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="card-title">En Son Yayınlanan 5 İlan</h1>
+                <div class="card-tools">
+                    <div class="input-group input-group-sm" style="width: 150px;">
+                        <div class="input-group-append">
+                            <a href="/Product/Index" class="text-primary"><b>Tüm İlanlara Git</b></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0" style="height: 330px;">
+                <table class="table table-head-fixed text-nowrap">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Yayın Tarihi</th>
+                            <th>Başlık</th>
+                            <th>Fiyat</th>
+                            <th>Şehir</th>
+                            <th>İlçe</th>
+                            <th>Adres</th>
+                            <th>Durum</th>
+                            <th>Kategori Adı</th>
+                            <th>Sitede Gör</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var pr in Model)
+                        {
+                            <tr>
+                                <td>@pr.Product.Id</td>
+                                <td>@pr.PublishDate</td>
+                                <td>@pr.Product.Title</td>
+                                <td>@pr.Product.Price</td>
+                                <td>@pr.Product.City.Name</td>
+                                <td>@pr.Product.District</td>
+                                <td>@pr.Product.Address</td>
+                                <td>@pr.Product.Type</td>
+                                <td>@pr.Product.ProductType.Name</td>
+
+                                <td><a href="/Home/ProductDetail?id=@pr.Product.Id" class="btn btn-outline-info btn-sm">Sitede Gör</a></td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
