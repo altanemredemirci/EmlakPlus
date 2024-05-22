@@ -1,4 +1,4 @@
-﻿@model CreateProductDTO
+﻿@model CreateProductDetailDTO
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -20,18 +20,18 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label asp-for="Title"></label>
-                                <input asp-for="Title" class="form-control" />
-                                <span asp-validation-for="Title" class="text-danger"></span>
+                                <label asp-for="Product.Title"></label>
+                                <input asp-for="Product.Title" class="form-control" />
+                                <span asp-validation-for="Product.Title" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="Price"></label>
-                                <input asp-for="Price" class="form-control" />
-                                <span asp-validation-for="Price" class="text-danger"></span>
+                                <label asp-for="Product.Price"></label>
+                                <input asp-for="Product.Price" class="form-control" />
+                                <span asp-validation-for="Product.Price" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="CityId"></label>
-                                <select class="form-control select2" style="width: 100%;" asp-for="CityId">
+                                <label asp-for="Product.CityId"></label>
+                                <select class="form-control select2" style="width: 100%;" asp-for="Product.CityId">
                                     <option value="">-- İl Seçiniz --</option>
                                     @foreach (var item in ViewBag.Cities) // ViewBag ya da Model'den gelen veriye göre düzenleyin
                                     {
@@ -40,67 +40,146 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label asp-for="District"></label>
-                                <select class="form-control select2" style="width: 100%;" asp-for="District">
+                                <label asp-for="Product.District"></label>
+                                <select class="form-control select2" style="width: 100%;" asp-for="Product.District">
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label asp-for="Address"></label>
-                                <textarea class="form-control" rows="3" placeholder="Adres Giriniz.." asp-for="@Model.Address">@Model.Address</textarea>
-                                <span asp-validation-for="Address" class="text-danger"></span>
+                                <label asp-for="Product.Address"></label>
+                                <textarea class="form-control" rows="3" placeholder="Adres Giriniz.." asp-for="@Model.Product.Address">@Model.Product.Address</textarea>
+                                <span asp-validation-for="Product.Address" class="text-danger"></span>
                             </div>                           
 
-                            <label asp-for="Type"></label>
+                            <label asp-for="Product.Type"></label>
                             <div class="d-flex">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="Type" id="radioSatilik" value="Satılık">
+                                    <input class="form-check-input" type="radio" name="Product.Type" id="radioSatilik" value="Satılık">
                                     <label class="form-check-label" for="radioSatilik">Satılık</label>
                                 </div>
                                 <div class="form-check ml-3">
-                                    <input class="form-check-input" type="radio" name="Type" id="radioKiralik" value="Kiralık">
+                                    <input class="form-check-input" type="radio" name="Product.Type" id="radioKiralik" value="Kiralık">
                                     <label class="form-check-label" for="radioKiralik">Kiralık</label>
                                 </div>
                             </div>
-                            <label asp-for="IsPopular"></label>
+                            <label asp-for="Product.IsPopular"></label>
                             <div class="d-flex">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="IsPopular" value="true">
+                                    <input class="form-check-input" type="checkbox" name="Product.IsPopular" value="true">
                                     <label class="form-check-label">Popüler</label>
                                 </div>
                                 
                             </div>
                             <div class="form-group">
                                 <label>ProductType</label>
-                                <select class="form-control select2" style="width: 100%;" asp-for="ProductTypeId">
+                                <select class="form-control select2" style="width: 100%;" asp-for="Product.ProductTypeId">
                                     <option value="">-- Kategori Seçiniz --</option>
                                     @foreach (var item in ViewBag.ProductTypes) // ViewBag ya da Model'den gelen veriye göre düzenleyin
                                     {
                                         <option value="@item.Id">@item.Name</option>
                                     }
                                 </select>
-                                <span asp-validation-for="ProductTypeId" class="text-danger"></span>
+                                <span asp-validation-for="Product.ProductTypeId" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="AgencyId"></label>
-                                <select class="form-control select2" style="width: 100%;" asp-for="AgencyId">
+                                <label asp-for="Product.AgencyId"></label>
+                                <select class="form-control select2" style="width: 100%;" asp-for="Product.AgencyId">
                                     <option value="">-- Acenta Seçiniz --</option>
                                     @foreach (var item in ViewBag.Agencies) // ViewBag ya da Model'den gelen veriye göre düzenleyin
                                     {
                                         <option value="@item.Id">@item.Name</option>
                                     }
                                 </select>
-                                <span asp-validation-for="AgencyId" class="text-danger"></span>
+                                <span asp-validation-for="Product.AgencyId" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label asp-for="CoverImage"></label><br />
-                                <img id="previewImage" src="" class="card-img-top" alt="..." style="max-width:100%">
+                            <div class="row">                                
+                                <div class="form-group">
+                                    <label asp-for="Product.CoverImage"></label><br />
+                                    <img id="previewImage" src="" class="card-img-top" alt="..." style="max-width:100%">
+                                </div>
+                                <div class="form-group">
+                                    <input type="file" id="imageInput" name="file" value="" accept="image/*" onchange="updateCard()" />
+                                    <span asp-validation-for="Product.CoverImage" class="text-danger"></span>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <input type="file" id="imageInput" name="file" value="@Model.CoverImage" accept="image/*" onchange="updateCard()" />
-                                <span asp-validation-for="CoverImage" class="text-danger"></span>
-                            </div>
+                          <div class="row">
+                              <div class="col-4">
+                                    <div class="form-group">
+                                        <label asp-for="Size"></label>
+                                        <input asp-for="Size" class="form-control" />
+                                        <span asp-validation-for="Size" class="text-danger"></span>
+                                    </div>
+                              </div>
+                               <div class="col-4">
+                                    <div class="form-group">
+                                        <label asp-for="BathCount"></label>
+                                        <input asp-for="BathCount" class="form-control" />
+                                        <span asp-validation-for="BathCount" class="text-danger"></span>
+                                    </div>
+                              </div>
+
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label asp-for="BedRoomCount"></label>
+                                        <input asp-for="BedRoomCount" class="form-control" />
+                                        <span asp-validation-for="BedRoomCount" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label asp-for="RoomCount"></label>
+                                        <input asp-for="RoomCount" class="form-control" />
+                                        <span asp-validation-for="RoomCount" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label asp-for="GarageSize"></label>
+                                        <input asp-for="GarageSize" class="form-control" />
+                                        <span asp-validation-for="GarageSize" class="text-danger"></span>
+                                    </div>
+                                </div>                              
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label asp-for="BuildYear"></label>
+                                        <input asp-for="BuildYear" class="form-control" />
+                                        <span asp-validation-for="BuildYear" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label asp-for="PublishDate"></label>
+                                        <input type="datetime" name="PublishDate" value="@DateTime.Now" disabled class="form-control" />
+                                        <span asp-validation-for="PublishDate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label asp-for="Description"></label>
+                                       <textarea name="Description" class="form-control"></textarea>
+                                        <span asp-validation-for="Description" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label asp-for="Location"></label>
+                                        <textarea name="Location" class="form-control"></textarea>
+                                        <span asp-validation-for="Location" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label asp-for="VideoUrl"></label>
+                                        <textarea name="VideoUrl" class="form-control"></textarea>
+                                        <span asp-validation-for="VideoUrl" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="file" name="files"  accept="image/*" multiple/>
+                                    <span asp-validation-for="Images" class="text-danger"></span>
+                                </div>
+                          </div>
                         </div>
                     </div>
                     <!-- /.card-body -->
@@ -118,7 +197,7 @@
 <script>
     $(document).ready(function () {
         // Şehir seçildiğinde ilçelerin dinamik olarak yüklenmesi
-        $('#CityId').change(function () {
+        $('#Product_CityId').change(function () {            
             var cityId = $(this).val(); // Seçilen şehrin Id'si
             // AJAX çağrısı
             $.ajax({
@@ -127,7 +206,7 @@
                 data: { "cityId": cityId },
                 success: function (data) {
                     // İlçeleri seçim kutusuna ekleme
-                    var districtsSelect = $('#District');
+                    var districtsSelect = $('#Product_District');
                     districtsSelect.empty(); // Önceki ilçeleri temizle
                     $.each(data, function (index, district) {
                         districtsSelect.append($('<option></option>').val(district.name).text(district.name));

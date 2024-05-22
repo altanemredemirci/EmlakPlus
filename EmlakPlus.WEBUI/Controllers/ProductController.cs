@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EmlakPlus.BLL;
 using EmlakPlus.BLL.Abstract;
+using EmlakPlus.BLL.DTOs.ProductDetailDTO;
 using EmlakPlus.BLL.DTOs.ProductDTO;
 using EmlakPlus.Entity;
 using EmlakPlus.WEBUI.Models;
@@ -12,14 +13,16 @@ namespace EmlakPlus.WEBUI.Controllers
     public class ProductController : Controller
     {
         private readonly IProductService _productService;
+        private readonly IProductDetailService _productDetailService;
         private readonly ICityService _cityService;
         private readonly IProductTypeService _productTypeService;
         private readonly IAgencyService _agencyService;
         private readonly IMapper _mapper;
 
-        public ProductController(IProductService productService, ICityService cityService, IProductTypeService productTypeService, IAgencyService agencyService, IMapper mapper)
+        public ProductController(IProductService productService,IProductDetailService productDetailService, ICityService cityService, IProductTypeService productTypeService, IAgencyService agencyService, IMapper mapper)
         {
             _productService = productService;
+            _productDetailService = productDetailService;
             _cityService = cityService;
             _productTypeService = productTypeService;
             _agencyService = agencyService;
@@ -36,12 +39,12 @@ namespace EmlakPlus.WEBUI.Controllers
             ViewBag.Cities = _cityService.GetAll();
             ViewBag.ProductTypes = _productTypeService.GetAll();
             ViewBag.Agencies = _agencyService.GetAll();
-            return View(new CreateProductDTO());
+            return View(new CreateProductDetailDTO());
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CreateProductDTO dto, IFormFile file)
+        public async Task<IActionResult> Create(CreateProductDetailDTO dto, IFormFile file, IFormFile[] files)
         {
             ModelState.Remove("CoverImage");
             if (ModelState.IsValid)
@@ -55,9 +58,27 @@ namespace EmlakPlus.WEBUI.Controllers
                     return View(dto);
                 }
 
-                dto.CoverImage = await ImageMethods.UploadImage(file);
+                if (files.Length == 0)
+                {
+                    ViewBag.Cities = _cityService.GetAll();
+                    ViewBag.ProductTypes = _productTypeService.GetAll();
+                    ViewBag.Agencies = _agencyService.GetAll();
+                    ModelState.AddModelError("", "İlan Detay Resimleri yüklenmedi.");
+                    return View(dto);
+                }
 
-                _productService.Create(_mapper.Map<Product>(dto));
+                dto.Product.CoverImage = await ImageMethods.UploadImage(file);
+
+                foreach (var item in files)
+                {
+                    Entity.Image image = new Entity.Image();
+                    image.Url = await ImageMethods.UploadImage(item);
+                    dto.Images.Add(image);
+                }
+                dto.Product.Status = true;
+                dto.PublishDate = DateTime.Now;
+                //_productService.Create(_mapper.Map<Product>(dto.Product));
+                _productDetailService.Create(_mapper.Map<ProductDetail>(dto));
 
                 return RedirectToAction("Index");
 
@@ -85,9 +106,9 @@ namespace EmlakPlus.WEBUI.Controllers
                 return View("Error", error);
             }
 
-            var product = _productService.GetById(id);
+            var productdetail = _productDetailService.GetById(id);
 
-            if (product == null)
+            if (productdetail == null)
             {
                 ErrorViewModel error = new ErrorViewModel()
                 {
@@ -100,7 +121,7 @@ namespace EmlakPlus.WEBUI.Controllers
                 return View("Error", error);
             }
 
-            var model = _mapper.Map<UpdateProductDTO>(product);
+            var model = _mapper.Map<UpdateProductDetailDTO>(productdetail);
 
             ViewBag.Cities = _cityService.GetAll();
             ViewBag.ProductTypes = _productTypeService.GetAll();
@@ -111,13 +132,14 @@ namespace EmlakPlus.WEBUI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(UpdateProductDTO dto, IFormFile file) 
+        public async Task<IActionResult> Edit(UpdateProductDetailDTO dto, IFormFile file, IFormFile[] files)
         {
+            ModelState.Remove("Images");
             if (ModelState.IsValid)
             {
-                var product = _productService.GetById(dto.Id);
+                var productDetail = _productDetailService.GetById(dto.ProductId);
 
-                if (product == null)
+                if (productDetail == null)
                 {
                     ErrorViewModel error = new ErrorViewModel()
                     {
@@ -132,11 +154,34 @@ namespace EmlakPlus.WEBUI.Controllers
 
                 if (file != null)
                 {
-                    ImageMethods.DeleteImage(product.CoverImage);
-                    dto.CoverImage=await ImageMethods.UploadImage(file);
+                    ImageMethods.DeleteImage(productDetail.Product.CoverImage);
+                    dto.Product.CoverImage = await ImageMethods.UploadImage(file);
+                }
+                else
+                {
+                    dto.Product.CoverImage = productDetail.Product.CoverImage;
                 }
 
-                _productService.Update(_mapper.Map<Product>(dto));
+                if (files.Length!=0)
+                {
+                    productDetail.Images.ForEach(i=>ImageMethods.DeleteImage(i.Url));
+
+                    foreach (var item in files)
+                    {
+                        Entity.Image image = new Entity.Image();
+                        image.Url = await ImageMethods.UploadImage(item);
+                        dto.Images.Add(image);
+                    }
+                }
+
+                else
+                {
+                    dto.Images = productDetail.Images;
+                }
+
+                dto.PublishDate = DateTime.Now;
+
+                _productDetailService.Update(_mapper.Map<ProductDetail>(dto));
                 return RedirectToAction("Index");
             }
 

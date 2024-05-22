@@ -7,13 +7,6 @@ namespace EmlakPlus.WEBUI.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IProductDetailService _productDetailService;
-
-        public HomeController(IProductDetailService productDetailService)
-        {
-            _productDetailService = productDetailService;
-        }
-
         public IActionResult Index()
         {
             return View();
@@ -37,6 +30,11 @@ namespace EmlakPlus.WEBUI.Controllers
         public IActionResult ProductList()
         {
             ViewBag.Route = "ProductList";
+            return View();
+        }
+
+        public IActionResult AgencyList()
+        {
             return View();
         }
 

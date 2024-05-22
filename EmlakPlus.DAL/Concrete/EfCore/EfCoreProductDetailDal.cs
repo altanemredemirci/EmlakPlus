@@ -28,5 +28,35 @@ namespace EmlakPlus.DAL.Concrete.EfCore
                 return context.ProductDetail.Include(i => i.Product).ThenInclude(i => i.ProductType).Include(i => i.Product.City).OrderByDescending(i => i.PublishDate).Take(5).ToList();
             }
         }
+
+        public override void Update(ProductDetail entity)
+        {
+            using(var context = new DataContext())
+            {
+                var product =context.Products.FirstOrDefault(i => i.Id == entity.ProductId);
+
+                product.IsPopular = entity.Product.IsPopular;
+                product.Address = entity.Product.Address;
+                product.CoverImage = entity.Product.CoverImage;
+                product.AgencyId = entity.Product.AgencyId;
+                product.CityId = entity.Product.CityId;
+                product.District = entity.Product.District;
+                product.Type = entity.Product.Type;
+                product.Price = entity.Product.Price;
+                product.Title = entity.Product.Title;
+                product.Status = entity.Product.Status;
+                product.ProductTypeId = entity.Product.ProductTypeId;
+                
+
+                var images = context.Images.Where(i => i.ProductDetailId == entity.Id).ToList();
+
+                context.Images.RemoveRange(context.Images.Where(i => i.ProductDetailId == entity.Id).ToList());
+
+                context.Images.AddRange(entity.Images);
+
+                context.Entry(entity).State = EntityState.Modified;
+                context.SaveChanges();
+            }
+        }
     }
 }

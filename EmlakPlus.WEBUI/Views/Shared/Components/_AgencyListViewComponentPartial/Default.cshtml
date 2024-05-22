@@ -1,0 +1,33 @@
+﻿@model List<ResultAgencyDTO>
+<!-- Team Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+            <h1 class="mb-3">Acenta Ekibimiz</h1>
+            <p>10 yıllık tecrübeli acentalarımız ile uluslararası yetkinlikte, müşteri memnuniyeti arkaplanda full hiz hep destek için sizlerleyiz.</p>
+        </div>
+        <div class="row g-4">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="team-item rounded overflow-hidden">
+                        <div class="position-relative">
+                            <img class="img-fluid" src="~/img/@item.ImageUrl" alt="">
+                            <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
+                                <a class="btn btn-square mx-1" href="@item.Facebook"><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-square mx-1" href="@item.Twitter"><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-square mx-1" href="@item.Instagram"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center p-4 mt-3">
+                            <h5 class="fw-bold mb-0">@item.Name</h5>
+                            <small>@item.Title</small>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+<!-- Team End -->

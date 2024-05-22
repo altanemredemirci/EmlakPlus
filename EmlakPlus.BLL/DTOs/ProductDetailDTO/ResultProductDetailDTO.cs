@@ -40,5 +40,6 @@ namespace EmlakPlus.BLL.DTOs.ProductDetailDTO
         public Product Product { get; set; }
 
         public List<Image> Images { get; set; }
+
     }
 }
