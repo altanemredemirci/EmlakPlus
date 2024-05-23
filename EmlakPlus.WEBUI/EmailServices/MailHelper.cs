@@ -39,6 +39,7 @@ namespace EmlakPlus.WEBUI.EmailServices
                     smtp.Send(message);
 
                     result = true;
+
                 }
             }
             catch (Exception)

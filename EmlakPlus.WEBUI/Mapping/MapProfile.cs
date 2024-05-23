@@ -2,6 +2,7 @@
 using EmlakPlus.BLL.DTOs.AgencyDTO;
 using EmlakPlus.BLL.DTOs.ClientDTO;
 using EmlakPlus.BLL.DTOs.ContactDTO;
+using EmlakPlus.BLL.DTOs.MailDTO;
 using EmlakPlus.BLL.DTOs.ProductDetailDTO;
 using EmlakPlus.BLL.DTOs.ProductDTO;
 using EmlakPlus.BLL.DTOs.ProductTypeDTO;
@@ -42,6 +43,9 @@ namespace EmlakPlus.WEBUI.Mapping
 
             CreateMap<Contact, ResultContactDTO>().ReverseMap();
             CreateMap<Contact, UpdateContactDTO>().ReverseMap();
+
+            CreateMap<Mail, ResultMailDTO>().ReverseMap();
+            CreateMap<Mail, UpdateMailDTO>().ReverseMap();
         }
     }
 }

@@ -1,0 +1,96 @@
+﻿@model List<ResultMailDTO>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="col-12">
+    <div class="card card-primary card-outline card-tabs">
+        <div class="card-header p-0 pt-1 border-bottom-0">
+            <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="custom-tabs-three-home-tab" data-toggle="pill" href="#all" role="tab" aria-controls="custom-tabs-three-home" aria-selected="true">Tümü</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill" href="#readed" role="tab" aria-controls="custom-tabs-three-profile" aria-selected="false">Okundu</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="custom-tabs-three-messages-tab" data-toggle="pill" href="#notread" role="tab" aria-controls="custom-tabs-three-messages" aria-selected="false">Okunmadı</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <div class="tab-content" id="custom-tabs-three-tabContent">
+                <div class="tab-pane fade active show" id="all" role="tabpanel" aria-labelledby="custom-tabs-three-home-tab">
+                    <table class="table table-hover text-nowrap">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Ad Soyad</th>
+                                <th>Email</th>
+                                <th>Konu</th>
+                                <th>Mesaj</th>
+                                <th>Okundu</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                                    @Html.Partial("_PartialMail", Model)
+                               
+                       
+
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="readed" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
+                    <table class="table table-hover text-nowrap">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Ad Soyad</th>
+                                <th>Email</th>
+                                <th>Konu</th>
+                                <th>Mesaj</th>
+                                <th>Okundu</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @Html.Partial("_PartialMail", Model.Where(i=> i.Read==true).ToList())
+
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="notread" role="tabpanel" aria-labelledby="custom-tabs-three-messages-tab">
+                    <table class="table table-hover text-nowrap">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Ad Soyad</th>
+                                <th>Email</th>
+                                <th>Konu</th>
+                                <th>Mesaj</th>
+                                <th>Okundu</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @Html.Partial("_PartialMail", Model.Where(i => i.Read == false).ToList())
+
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+               
+            </div>
+        </div>
+        <!-- /.card -->
+    </div>
+</div>

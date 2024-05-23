@@ -1,0 +1,22 @@
+﻿@model List<ResultMailDTO>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>@item.Id</td>
+        <td>@item.Name</td>
+        <td>@item.Email</td>
+        <td>@item.Subject</td>
+        <td style="text-wrap: wrap;">@item.Message</td>
+        <td>
+            @if (item.Read == true)
+            {
+                <a href="/Mail/StatusChange?id=@item.Id" class="btn btn-outline-warning">Okunmadı</a>
+            }
+            else
+            {
+                <a href="/Mail/StatusChange?id=@item.Id" class="btn btn-outline-success">Okundu</a>
+            }
+        </td>
+    </tr>
+}

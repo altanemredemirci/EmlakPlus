@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EmlakPlus.Entity
+namespace EmlakPlus.BLL.DTOs.MailDTO
 {
-    public class Mail
+    public class ResultMailDTO
     {
         public int Id { get; set; }
         [StringLength(50)]
