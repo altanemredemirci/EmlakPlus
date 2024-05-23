@@ -1,6 +1,7 @@
 using EmlakPlus.BLL.Abstract;
 using EmlakPlus.Entity;
 using EmlakPlus.WEBUI.EmailServices;
+using EmlakPlus.WEBUI.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmlakPlus.WEBUI.Controllers
@@ -9,6 +10,7 @@ namespace EmlakPlus.WEBUI.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.Route = true;
             return View();
         }
 
@@ -29,13 +31,17 @@ namespace EmlakPlus.WEBUI.Controllers
 
         public IActionResult ProductList()
         {
-            ViewBag.Route = "ProductList";
             return View();
         }
 
         public IActionResult AgencyList()
         {
             return View();
+        }
+
+        public IActionResult AgencyDetail(int? id)
+        {
+            return View(id);
         }
 
         public IActionResult SendEmail(Mail mail)

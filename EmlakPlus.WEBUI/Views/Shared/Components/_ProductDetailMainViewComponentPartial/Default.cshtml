@@ -133,7 +133,7 @@
                                 <img src="~/img/@Model.Product.Agency.ImageUrl" class="img-fluid rounded-start  w-100">
                             </div>
                             <div class="col-md-8">
-                                <h5 class="card-title">@Model.Product.Agency.Name</h5>
+                                <a asp-action="AgencyDetail" asp-controller="Home" asp-route-id="@Model.Product.AgencyId"> <h5 class="card-title">@Model.Product.Agency.Name</h5></a>
                                 <div class="card-body">
                                     <div>
                                         <p>@Model.Product.Agency.Phone

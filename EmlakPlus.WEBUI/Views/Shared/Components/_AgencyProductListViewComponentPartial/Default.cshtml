@@ -1,0 +1,36 @@
+﻿@model List<ResultProductDTO>
+@{
+    var agency = Model.FirstOrDefault().Agency;
+}
+<!-- Property List Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-0 gx-5 align-items-end">
+            <div class="col-lg-6">
+                <div class="text-start mx-auto mb-5 wow slideInLeft" data-wow-delay="0.1s">
+                    <h1 class="mb-3">@agency.Name Acente İlanları</h1>
+                    <h5><span class="badge bg-success">@(string.Format("{0:(####) ### ## ##}", Convert.ToInt64(agency.Phone)))</span> <span class="badge bg-success">@agency.Email</h5>
+                </div>
+            </div>
+            <div class="col-lg-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s">
+                <ul class="nav nav-pills d-inline-flex justify-content-end mb-5">
+                    <li class="nav-item me-2">
+                        <a class="btn btn-outline-primary active" data-bs-toggle="pill" href="#sell">Satılık</a>
+                    </li>
+                    <li class="nav-item me-2">
+                        <a class="btn btn-outline-primary" data-bs-toggle="pill" href="#rent">Kiralık</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="tab-content">
+            <div id="sell" class="tab-pane fade show p-0 active">
+                @Html.Partial("_PartialProduct", Model.Where(i => i.Type == "Satılık").ToList())
+            </div>
+            <div id="rent" class="tab-pane fade show p-0">
+                @Html.Partial("_PartialProduct", Model.Where(i => i.Type == "Kiralık").ToList())
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Property List End -->

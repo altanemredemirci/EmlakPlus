@@ -13,9 +13,9 @@ namespace EmlakPlus.DAL.Concrete.EfCore
     {
         public override ProductDetail GetById(int id)
         {
-            using(var context = new DataContext())
+            using (var context = new DataContext())
             {
-                var model =  context.ProductDetail.Where(i => i.ProductId == id).Include(i => i.Product).ThenInclude(i=> i.ProductType).Include(i=> i.Product.City).Include(i=> i.Product.Agency).Include("Images").FirstOrDefault();
+                var model = context.ProductDetail.Where(i => i.ProductId == id).Include(i => i.Product).ThenInclude(i => i.ProductType).Include(i => i.Product.City).Include(i => i.Product.Agency).Include("Images").FirstOrDefault();
 
                 return model;
             }
@@ -29,11 +29,11 @@ namespace EmlakPlus.DAL.Concrete.EfCore
             }
         }
 
-        public override void Update(ProductDetail entity)
+        public override async void Update(ProductDetail entity)
         {
-            using(var context = new DataContext())
+            using (var context = new DataContext())
             {
-                var product =context.Products.FirstOrDefault(i => i.Id == entity.ProductId);
+                var product = context.Products.FirstOrDefault(i => i.Id == entity.ProductId);
 
                 product.IsPopular = entity.Product.IsPopular;
                 product.Address = entity.Product.Address;
@@ -46,13 +46,19 @@ namespace EmlakPlus.DAL.Concrete.EfCore
                 product.Title = entity.Product.Title;
                 product.Status = entity.Product.Status;
                 product.ProductTypeId = entity.Product.ProductTypeId;
-                
+
+                entity.Product = product;
+
+                //await context.SaveChangesAsync();
 
                 var images = context.Images.Where(i => i.ProductDetailId == entity.Id).ToList();
 
-                context.Images.RemoveRange(context.Images.Where(i => i.ProductDetailId == entity.Id).ToList());
-
+                context.Images.RemoveRange(images);
                 context.Images.AddRange(entity.Images);
+                //await context.SaveChangesAsync();
+
+
+                //await context.SaveChangesAsync();
 
                 context.Entry(entity).State = EntityState.Modified;
                 context.SaveChanges();

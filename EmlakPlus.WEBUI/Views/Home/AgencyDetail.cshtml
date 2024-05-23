@@ -1,0 +1,8 @@
+﻿@model Int32
+@{
+    ViewData["Title"] = "AgencyDetail";
+}
+
+@await Component.InvokeAsync("_AgencyProductHeaderViewComponentPartial")
+@await Component.InvokeAsync("_HomeSearchViewComponentPartial")
+@await Component.InvokeAsync("_AgencyProductListViewComponentPartial",Model)

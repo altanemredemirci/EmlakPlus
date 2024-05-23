@@ -176,7 +176,13 @@ namespace EmlakPlus.WEBUI.Controllers
 
                 else
                 {
-                    dto.Images = productDetail.Images;
+                    foreach (var item in productDetail.Images)
+                    {
+                        Entity.Image image = new Entity.Image();
+                        image.Url = item.Url;
+                        image.ProductDetailId = item.ProductDetailId;
+                        dto.Images.Add(image);
+                    }
                 }
 
                 dto.PublishDate = DateTime.Now;
