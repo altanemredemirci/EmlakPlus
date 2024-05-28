@@ -28,5 +28,6 @@ namespace EmlakPlus.DAL.Concrete.EfCore
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Mail> Mails { get; set; }
         public DbSet<Image> Images { get; set; }
+        public DbSet<ToDoList> ToDoLists { get; set; }
     }
 }

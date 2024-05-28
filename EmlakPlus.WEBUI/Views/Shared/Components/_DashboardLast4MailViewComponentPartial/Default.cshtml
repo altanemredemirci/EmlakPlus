@@ -1,0 +1,36 @@
+﻿@model List<ResultMailDTO>
+  <div class="col-md-4">
+        <div class="card card-widget">
+            <div class="card-header">
+                <div class="user-block">
+                    <h4>Mesajlar</h4>
+                </div>
+                <!-- /.user-block -->
+                <div class="card-tools">
+                    <span class="username"><a href="/Mail/Index">Tümünü Gör</a></span>
+                </div>
+                <!-- /.card-tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body  card-comments">
+                @foreach (var item in Model)
+                {
+                    <div class="card-comment">
+                        <img class="img-circle img-sm" src="/admin/dist/img/user3-128x128.jpg" alt="User Image">
+
+                        <div class="comment-text">
+                            <span class="username">
+                                @item.Name
+                                <span class="text-muted float-right">@item.SendDate.ToString("dd.MMM.yyyy")</span>
+                            </span><!-- /.username -->
+                            @item.Message
+                        </div>
+                    </div>
+                }
+
+            </div>
+
+        </div>
+    </div>
+
+  

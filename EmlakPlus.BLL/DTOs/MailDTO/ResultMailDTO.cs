@@ -18,6 +18,7 @@ namespace EmlakPlus.BLL.DTOs.MailDTO
         public string Subject { get; set; }
         [StringLength(500)]
         public string Message { get; set; }
+        public DateTime SendDate { get; set; }
         public bool Read { get; set; }
     }
 }

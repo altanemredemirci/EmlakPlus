@@ -34,6 +34,11 @@ namespace EmlakPlus.BLL.Concrete
             return _mailDal.GetById(id);
         }
 
+        public List<Mail> GetLast4(Expression<Func<Mail, bool>> filter = null)
+        {
+            return _mailDal.GetLast4(filter);
+        }
+
         public void Update(Mail entity)
         {
             _mailDal.Update(entity);

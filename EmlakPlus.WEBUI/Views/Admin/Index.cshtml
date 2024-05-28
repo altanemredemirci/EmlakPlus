@@ -6,4 +6,9 @@
 
 @await Component.InvokeAsync("_DashboardStatisticViewComponentPartial")
 @await Component.InvokeAsync("_DashboardLast5ProductViewComponentPartial")
+<div class="row">
+    @await Component.InvokeAsync("_DashboardLast4MailViewComponentPartial")
+    @await Component.InvokeAsync("_DashboardCalenderViewComponentPartial")
+</div>
+
 

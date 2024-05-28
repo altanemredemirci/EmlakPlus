@@ -58,6 +58,7 @@ namespace EmlakPlus.WEBUI.Controllers
             if (result)
             {
                 mail.Read = false;
+                mail.SendDate = DateTime.Now;
                 _mailService.Create(mail);
                 TempData["MailSuccess"] = "true";
             }

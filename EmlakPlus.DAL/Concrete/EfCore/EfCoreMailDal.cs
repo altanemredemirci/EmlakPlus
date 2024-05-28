@@ -41,6 +41,16 @@ namespace EmlakPlus.DAL.Concrete.EfCore
             }
         }
 
+        public List<Mail> GetLast4(Expression<Func<Mail, bool>> filter = null)
+        {
+            using (var context = new DataContext())
+            {
+                return filter == null
+                    ? context.Mails.OrderByDescending(i=> i.SendDate).Take(4).ToList()
+                    : context.Mails.Where(filter).OrderByDescending(i => i.SendDate).Take(4).ToList();
+            }
+        }
+
         public void Update(Mail entity)
         {
             using (var context = new DataContext())
