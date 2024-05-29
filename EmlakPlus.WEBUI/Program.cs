@@ -2,6 +2,7 @@ using EmlakPlus.BLL.Abstract;
 using EmlakPlus.BLL.Concrete;
 using EmlakPlus.DAL.Abstract;
 using EmlakPlus.DAL.Concrete.EfCore;
+using EmlakPlus.DAL.Hubs;
 using EmlakPlus.WEBUI.Mapping;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,16 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddAutoMapper(typeof(MapProfile));
+
+builder.Services.AddCors(opt => 
+    opt.AddPolicy("CorsPolicy", builder => 
+    builder.AllowAnyHeader()   //Her baþlýða izin ver
+           .AllowCredentials() //Kimliklendirmeye izin ver
+           .AllowAnyMethod()   //Her metoda izin ver
+           .SetIsOriginAllowed((host)=>true)
+    ));
+
+builder.Services.AddSignalR();
 
 //Dependency Injection
 
@@ -57,7 +68,7 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
+app.UseCors();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -68,5 +79,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Admin}/{action=Index}/{id?}");
+
+app.MapHub<SignalRHub>("/signalrhub");
 
 app.Run();

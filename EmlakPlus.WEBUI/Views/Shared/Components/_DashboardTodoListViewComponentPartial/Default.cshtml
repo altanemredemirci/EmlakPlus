@@ -1,0 +1,47 @@
+﻿@using EmlakPlus.BLL.DTOs.TodoListDTO;
+@model List<ResultTodoListDTO>
+
+<div class="col-md-4">
+    <div class="card">
+        <div class="card-header ui-sortable-handle" style="cursor: move;">
+            <h3 class="card-title">
+                <i class="ion ion-clipboard mr-1"></i>
+                To Do List
+            </h3>
+            <div class="card-tools">
+                <span class="username"><a href="#">Tümünü Gör</a></span>
+            </div>
+
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <ul class="todo-list ui-sortable" data-widget="todo-list">
+                @for (var i = 0; i < Model.Count; i++)
+                {
+                    <li>
+                        <!-- drag handle -->
+                        <span class="handle ui-sortable-handle">
+                            <i class="fas fa-ellipsis-v"></i>
+                            <i class="fas fa-ellipsis-v"></i>
+                        </span>
+                        <!-- checkbox -->
+                        <div class="icheck-primary d-inline ml-2">
+                            <input type="checkbox" value="" name="todo@(i+1)" id="todoCheck@(i+1)" @(Model[i].Status == true ? "checked" : "")>
+                            <label for="todoCheck@(i+1)"></label>
+                        </div>
+                        <!-- todo text -->
+                        <span class="text">@Model[i].Description</span>
+                        <!-- Emphasis label -->
+                        <small class="badge badge-danger"><i class="far fa-clock"></i> @(DateTime.Now.Day - Model[i].AddDate.Day) gün</small>
+                        <!-- General tools such as edit or delete-->
+                        <div class="tools">
+                            <i class="fas fa-edit"></i>
+                            <i class="fas fa-trash-o"></i>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+
+    </div>
+</div>
