@@ -2,7 +2,7 @@ using EmlakPlus.BLL.Abstract;
 using EmlakPlus.BLL.Concrete;
 using EmlakPlus.DAL.Abstract;
 using EmlakPlus.DAL.Concrete.EfCore;
-using EmlakPlus.DAL.Hubs;
+using EmlakPlus.WEBUI.Hubs;
 using EmlakPlus.WEBUI.Mapping;
 
 var builder = WebApplication.CreateBuilder(args);
