@@ -7,6 +7,7 @@ using EmlakPlus.BLL.DTOs.ProductDetailDTO;
 using EmlakPlus.BLL.DTOs.ProductDTO;
 using EmlakPlus.BLL.DTOs.ProductTypeDTO;
 using EmlakPlus.BLL.DTOs.SliderDTO;
+using EmlakPlus.BLL.DTOs.TodoListDTO;
 using EmlakPlus.BLL.DTOs.WhoWeAreDTO;
 using EmlakPlus.Entity;
 
@@ -46,6 +47,8 @@ namespace EmlakPlus.WEBUI.Mapping
 
             CreateMap<Mail, ResultMailDTO>().ReverseMap();
             CreateMap<Mail, UpdateMailDTO>().ReverseMap();
+
+            CreateMap<ToDoList, ResultTodoListDTO>().ReverseMap();
         }
     }
 }

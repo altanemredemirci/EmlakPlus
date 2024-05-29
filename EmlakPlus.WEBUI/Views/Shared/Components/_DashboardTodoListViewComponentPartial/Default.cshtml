@@ -1,6 +1,8 @@
-﻿@using EmlakPlus.BLL.DTOs.TodoListDTO;
+﻿﻿@using Microsoft.AspNetCore.SignalR
+@using EmlakPlus.BLL.DTOs.TodoListDTO;
 @model List<ResultTodoListDTO>
 
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
 <div class="col-md-4">
     <div class="card">
         <div class="card-header ui-sortable-handle" style="cursor: move;">
@@ -15,33 +17,87 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-            <ul class="todo-list ui-sortable" data-widget="todo-list">
-                @for (var i = 0; i < Model.Count; i++)
-                {
-                    <li>
-                        <!-- drag handle -->
-                        <span class="handle ui-sortable-handle">
-                            <i class="fas fa-ellipsis-v"></i>
-                            <i class="fas fa-ellipsis-v"></i>
-                        </span>
-                        <!-- checkbox -->
-                        <div class="icheck-primary d-inline ml-2">
-                            <input type="checkbox" value="" name="todo@(i+1)" id="todoCheck@(i+1)" @(Model[i].Status == true ? "checked" : "")>
-                            <label for="todoCheck@(i+1)"></label>
-                        </div>
-                        <!-- todo text -->
-                        <span class="text">@Model[i].Description</span>
-                        <!-- Emphasis label -->
-                        <small class="badge badge-danger"><i class="far fa-clock"></i> @(DateTime.Now.Day - Model[i].AddDate.Day) gün</small>
-                        <!-- General tools such as edit or delete-->
-                        <div class="tools">
-                            <i class="fas fa-edit"></i>
-                            <i class="fas fa-trash-o"></i>
-                        </div>
-                    </li>
-                }
+            <ul class="todo-list ui-sortable" data-widget="todo-list" id="todoList">
+                <!-- SignalR kütüphanesi ile bu alan dolduruluyor-->
             </ul>
         </div>
 
     </div>
 </div>
+
+<script>
+    $(document).ready(() => {
+        var connection = new signalR.HubConnectionBuilder().withUrl("http://localhost:5263/SignalRHub").build();
+        $("#connstatus").text(connection.state);
+
+        connection.start().then(() => {
+            $("#connstatus").text(connection.state);
+            setInterval(() => {
+                connection.invoke("SendTodoList");
+            }, 5000);
+
+        }).catch((err) => { console.log(err) });
+
+        // Sunucudan gelen "To Do List" değerlerini işleme
+        connection.on("ReceiveTodoList", (todoList) => {
+            // "To Do List" içeriğini güncelleme
+            updateTodoList(todoList);
+        });
+
+        // "To Do List" içeriğini güncelleme fonksiyonu
+        function updateTodoList(todoList) {
+            // "To Do List" içeriğini temizleme
+            $("#todoList").empty();
+            // Yeni "To Do List" içeriğini oluşturma
+            todoList.forEach((todo, index) => {
+                var listItem = `<li>
+                                    <span class="handle ui-sortable-handle">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </span>
+                                    <div class="icheck-primary d-inline ml-2">
+                                            <input type="checkbox" value="" name="todo${index + 1}" id="todoCheck${index + 1}" ${todo.status ? "checked" : ""} onchange="statusChange(${todo.id})">
+                                        <label for="todoCheck${index + 1}"></label>
+                                    </div>
+                                    <span class="text">${todo.description}</span>
+                                    <small class="badge badge-danger"><i class="far fa-clock"></i> ${calculateDays(todo.addDate)}</small>
+                                    <div class="tools">
+                                        <i class="fas fa-edit"></i>
+                                        <i class="fas fa-trash-o"></i>
+                                    </div>
+                                </li>`;
+                // Yeni "To Do List" öğelerini ekleme
+                $("#todoList").append(listItem);
+            });
+        }
+
+        // Görevin eklenme tarihini hesaplayan fonksiyon
+        function calculateDays(addDate) {
+            var today = new Date();
+            var difference = today.getDate() - new Date(addDate).getDate();
+            return difference + " gün";
+        }
+
+
+    });
+
+   
+        // Şehir seçildiğinde ilçelerin dinamik olarak yüklenmesi
+        function statusChange(id) {
+
+            // AJAX çağrısı
+            $.ajax({
+                url: '/TodoList/StatusChange',
+                type: 'GET',
+                data: { "id": id },
+                success: function (data) {
+
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        };
+   
+
+</script>

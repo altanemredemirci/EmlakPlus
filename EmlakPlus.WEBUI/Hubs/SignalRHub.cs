@@ -11,10 +11,12 @@ namespace EmlakPlus.WEBUI.Hubs
     public class SignalRHub:Hub
     {
         private readonly IStatisticService _statisticService;
+        private readonly ITodoListService _todoListService;
 
-        public SignalRHub(IStatisticService statisticService)
+        public SignalRHub(IStatisticService statisticService, ITodoListService todoListService)
         {
             _statisticService = statisticService;
+            _todoListService = todoListService;
         }
 
         public async Task SendProductTypeCount()
@@ -22,6 +24,13 @@ namespace EmlakPlus.WEBUI.Hubs
             var productTypeCount = _statisticService.ProductTypeCount();
 
             await Clients.All.SendAsync("ReceiveProductTypeCount", productTypeCount);
+        }
+
+        public async Task SendTodoList()
+        {
+            var todoList = _todoListService.GetAll();
+
+            await Clients.All.SendAsync("ReceiveTodoList", todoList);
         }
     }
 }

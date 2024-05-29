@@ -429,18 +429,7 @@ html.maximized-card {
       display: inline-block;
     }
 
-    &.done {
-      color: darken($gray-500, 25%);
-
-      .text {
-        font-weight: 500;
-        text-decoration: line-through;
-      }
-
-      .badge {
-        background-color: $gray-500 !important;
-      }
-    }
+      
   }
 
   // Color variants

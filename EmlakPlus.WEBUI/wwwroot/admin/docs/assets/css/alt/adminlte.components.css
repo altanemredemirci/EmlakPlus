@@ -7869,14 +7869,7 @@ html.maximized-card {
   display: inline-block;
 }
 
-.todo-list > li.done {
-  color: #697582;
-}
 
-.todo-list > li.done .text {
-  font-weight: 500;
-  text-decoration: line-through;
-}
 
 .todo-list > li.done .badge {
   background-color: #adb5bd !important;

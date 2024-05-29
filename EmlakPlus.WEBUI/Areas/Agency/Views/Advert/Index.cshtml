@@ -1,7 +1,8 @@
 ﻿@model List<ResultProductDTO>
+
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Areas/Agency/Views/LayoutAgency/Index.cshtml";
 }
 
 <div class="row">
@@ -28,7 +29,7 @@
                             <th>Fiyat</th>
                             <th>Şehir</th>
                             <th>İlçe</th>
-                            <th>Adres</th>                           
+                            <th>Adres</th>
                             <th>Popüler</th>
                             <th>İlan Türü</th>
                             <th>Kategori Adı</th>
@@ -48,7 +49,7 @@
                                 <td>@pr.Price</td>
                                 <td>@pr.City.Name</td>
                                 <td>@pr.District</td>
-                                <td>@pr.Address</td>                                
+                                <td>@pr.Address</td>
                                 <td>@pr.IsPopular</td>
                                 <td>@pr.Type</td>
                                 <td>@pr.ProductType.Name</td>
@@ -67,6 +68,7 @@
 
                                 <td><a href="/Product/Edit?id=@pr.Id" class="btn btn-outline-warning btn-sm">Güncelle</a></td>
                                 <td><a href="/Product/Delete?id=@pr.Id" class="btn btn-outline-danger btn-sm">Sil</a></td>
+                                <td><a href="/Home/ProductDetail?id=@pr.Id" class="btn btn-outline-info btn-sm">Sitede Gör</a></td>
                             </tr>
                         }
 
@@ -80,4 +82,3 @@
         <!-- /.card -->
     </div>
 </div>
-

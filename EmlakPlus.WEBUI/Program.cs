@@ -80,6 +80,14 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Admin}/{action=Index}/{id?}");
 
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+      name: "areas",
+      pattern: "{area:exists}/{controller=Advert}/{action=Index}/{id?}"
+    );
+});
+
 app.MapHub<SignalRHub>("/signalrhub");
 
 app.Run();
