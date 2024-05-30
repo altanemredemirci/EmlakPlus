@@ -97,8 +97,20 @@ app.MapControllerRoute(
 
 app.MapControllerRoute(
     name: "advert",
+    pattern: "advert/Mailbox",
+    defaults: "{area:exists}/{controller=Advert}/{action=MailBox}/{id?}"
+                );
+
+app.MapControllerRoute(
+    name: "advert",
     pattern: "advert/sendMail",
     defaults: "{area:exists}/{controller=Advert}/{action=SendMail}/{id?}"
+                );
+
+app.MapControllerRoute(
+    name: "advert",
+    pattern: "advert/Profile",
+    defaults: "{area:exists}/{controller=Advert}/{action=Profile}/{id?}"
                 );
 //app.UseEndpoints(endpoints =>
 //{
