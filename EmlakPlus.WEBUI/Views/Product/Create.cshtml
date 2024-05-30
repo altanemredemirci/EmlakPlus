@@ -83,7 +83,7 @@
                             <div class="form-group">
                                 <label asp-for="Product.AgencyId"></label>
                                 <select class="form-control select2" style="width: 100%;" asp-for="Product.AgencyId">
-                                    <option value="">-- Acenta Seçiniz --</option>
+                                    <option value="">-- Acente Seçiniz --</option>
                                     @foreach (var item in ViewBag.Agencies) // ViewBag ya da Model'den gelen veriye göre düzenleyin
                                     {
                                         <option value="@item.Id">@item.Name</option>

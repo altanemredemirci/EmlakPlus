@@ -31,15 +31,11 @@
                                 <th>Konu</th>
                                 <th>Mesaj</th>
                                 <th>Okundu</th>
+                                <th>Yanıtla</th>
                             </tr>
                         </thead>
                         <tbody>
-                            
-                                    @Html.Partial("_PartialMail", Model)
-                               
-                       
-
-
+                            @Html.Partial("_PartialMail", Model)
                         </tbody>
                     </table>
                 </div>
@@ -57,7 +53,7 @@
                         </thead>
                         <tbody>
 
-                            @Html.Partial("_PartialMail", Model.Where(i=> i.Read==true).ToList())
+                            @Html.Partial("_PartialMail", Model.Where(i => i.Read == true).ToList())
 
 
 
@@ -87,10 +83,10 @@
                         </tbody>
                     </table>
                 </div>
-                </div>
-               
             </div>
+
         </div>
-        <!-- /.card -->
     </div>
+    <!-- /.card -->
+</div>
 </div>

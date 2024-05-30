@@ -69,5 +69,8 @@ namespace EmlakPlus.WEBUI.Controllers
 
             return RedirectToAction("Contact");
         }
+
+
+
     }
 }

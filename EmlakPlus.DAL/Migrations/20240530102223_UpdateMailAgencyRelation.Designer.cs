@@ -4,6 +4,7 @@ using EmlakPlus.DAL.Concrete.EfCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmlakPlus.DAL.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240530102223_UpdateMailAgencyRelation")]
+    partial class UpdateMailAgencyRelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -223,7 +226,7 @@ namespace EmlakPlus.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AgencyId")
+                    b.Property<int?>("AgencyId")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
@@ -239,9 +242,6 @@ namespace EmlakPlus.DAL.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<bool>("Read")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Reply")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("SendDate")
@@ -504,13 +504,9 @@ namespace EmlakPlus.DAL.Migrations
 
             modelBuilder.Entity("EmlakPlus.Entity.Mail", b =>
                 {
-                    b.HasOne("EmlakPlus.Entity.Agency", "Agency")
+                    b.HasOne("EmlakPlus.Entity.Agency", null)
                         .WithMany("Mails")
-                        .HasForeignKey("AgencyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Agency");
+                        .HasForeignKey("AgencyId");
                 });
 
             modelBuilder.Entity("EmlakPlus.Entity.Product", b =>

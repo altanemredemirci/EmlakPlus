@@ -20,5 +20,9 @@ namespace EmlakPlus.Entity
         public string Message { get; set; }
         public DateTime SendDate { get; set; }
         public bool Read { get; set; }
+        public bool Reply { get; set; }
+
+        public int AgencyId { get; set; }
+        public Agency Agency { get; set; }
     }
 }

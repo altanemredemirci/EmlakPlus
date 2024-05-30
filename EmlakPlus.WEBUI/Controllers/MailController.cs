@@ -16,9 +16,13 @@ namespace EmlakPlus.WEBUI.Controllers
             _mapper = mapper;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int? agencyId)
         {
-            return View(_mapper.Map<List<ResultMailDTO>>(_mailService.GetAll()));
+            if (agencyId == null)
+            {
+                return View(_mapper.Map<List<ResultMailDTO>>(_mailService.GetAll()));
+            }
+            return View(_mapper.Map<List<ResultMailDTO>>(_mailService.GetAll(i=> i.AgencyId==agencyId)));
         }
 
         public IActionResult StatusChange(int id)

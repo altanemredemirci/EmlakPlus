@@ -1,4 +1,5 @@
-﻿<div class="col-md-6">
+﻿@model Mail
+<div class="col-md-6">
     <div class="wow fadeInUp" data-wow-delay="0.5s">
 
         @if (TempData["MailSuccess"] == null)
@@ -20,7 +21,7 @@
                 <div class="alert alert-danger" role="alert">
                     Mail Gönderimi Başarısız.
                 </div>
-            }   
+            }
         }
 
 
@@ -45,15 +46,29 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    <div class="form-floating">
-                        <textarea class="form-control" placeholder="Leave a message here" name="message" style="height: 150px"></textarea>
-                        <label for="message">Mesaj</label>
+                    <div class="form-group"> 
+                        <select class="form-control select2" style="width: 100%; background-color:white !important" asp-for="AgencyId">
+                            <option value="">Acente Seçiniz</option>
+                            @foreach (var item in ViewBag.Agencies) // ViewBag ya da Model'den gelen veriye göre düzenleyin
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                        </select>
+                        <span asp-validation-for="AgencyId" class="text-danger"></span>
                     </div>
                 </div>
-                <div class="col-12">
-                    <button class="btn btn-primary w-100 py-3" type="submit">Email Gönder</button>
+            </div>
+
+            <div class="col-12  mt-2">
+                <div class="form-floating">
+                    <textarea class="form-control" placeholder="Mesajınız" name="message" style="height: 150px"></textarea>
+                    <label for="message">Mesaj</label>
                 </div>
             </div>
-        </form>
-    </div>
+            <div class="col-12">
+                <button class="btn btn-primary w-100 py-3" type="submit">Email Gönder</button>
+            </div>
+   
+    </form>
+</div>
 </div>

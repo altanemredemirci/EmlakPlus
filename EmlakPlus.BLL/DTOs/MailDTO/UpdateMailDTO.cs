@@ -19,5 +19,6 @@ namespace EmlakPlus.BLL.DTOs.MailDTO
         [StringLength(500)]
         public string Message { get; set; }
         public bool Read { get; set; }
+        public bool Reply { get; set; }
     }
 }

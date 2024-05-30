@@ -4,6 +4,7 @@ using EmlakPlus.DAL.Abstract;
 using EmlakPlus.DAL.Concrete.EfCore;
 using EmlakPlus.WEBUI.Hubs;
 using EmlakPlus.WEBUI.Mapping;
+using Microsoft.Extensions.FileSystemGlobbing.Internal;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,19 +12,19 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddAutoMapper(typeof(MapProfile));
 
-builder.Services.AddCors(opt => 
-    opt.AddPolicy("CorsPolicy", builder => 
+builder.Services.AddCors(opt =>
+    opt.AddPolicy("CorsPolicy", builder =>
     builder.AllowAnyHeader()   //Her baþlýða izin ver
            .AllowCredentials() //Kimliklendirmeye izin ver
            .AllowAnyMethod()   //Her metoda izin ver
-           .SetIsOriginAllowed((host)=>true)
+           .SetIsOriginAllowed((host) => true)
     ));
 
 builder.Services.AddSignalR();
 
 //Dependency Injection
 
-builder.Services.AddScoped<IProductService, ProductManager>();   
+builder.Services.AddScoped<IProductService, ProductManager>();
 builder.Services.AddScoped<IProductDal, EfCoreProductDal>();
 
 builder.Services.AddScoped<IProductDetailService, ProductDetailManager>();
@@ -80,13 +81,32 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Admin}/{action=Index}/{id?}");
 
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllerRoute(
-      name: "areas",
-      pattern: "{area:exists}/{controller=Advert}/{action=Index}/{id?}"
-    );
-});
+
+
+    app.MapControllerRoute(
+    name: "advert",
+    pattern: "advert/product",
+    defaults: "{area:exists}/{controller=Advert}/{action=Index}/{id?}"
+                );
+
+app.MapControllerRoute(
+    name: "advert",
+    pattern: "advert/expiredProduct",
+    defaults: "{area:exists}/{controller=Advert}/{action=ExpiredProduct}/{id?}"
+                );
+
+app.MapControllerRoute(
+    name: "advert",
+    pattern: "advert/sendMail",
+    defaults: "{area:exists}/{controller=Advert}/{action=SendMail}/{id?}"
+                );
+//app.UseEndpoints(endpoints =>
+//{
+//    endpoints.MapControllerRoute(
+//      name: "areas",
+//      pattern: "{area:exists}/{controller=Advert}/{action=Index}/{id?}"
+//    );
+//});
 
 app.MapHub<SignalRHub>("/signalrhub");
 

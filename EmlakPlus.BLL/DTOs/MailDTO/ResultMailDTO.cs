@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EmlakPlus.Entity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -20,5 +21,8 @@ namespace EmlakPlus.BLL.DTOs.MailDTO
         public string Message { get; set; }
         public DateTime SendDate { get; set; }
         public bool Read { get; set; }
+        public bool Reply { get; set; }
+        public int AgencyId { get; set; }
+        public Agency Agency { get; set; }
     }
 }

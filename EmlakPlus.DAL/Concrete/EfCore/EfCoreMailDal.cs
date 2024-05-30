@@ -27,8 +27,8 @@ namespace EmlakPlus.DAL.Concrete.EfCore
               using (var context = new DataContext())
                 {
                     return filter == null
-                        ? context.Mails.ToList()
-                        : context.Mails.Where(filter).ToList();
+                        ? context.Mails.Include("Agency").ToList()
+                        : context.Mails.Include("Agency").Where(filter).ToList();
                 }
             
         }

@@ -18,5 +18,70 @@
                 <a href="/Mail/StatusChange?id=@item.Id" class="btn btn-outline-success">Okundu</a>
             }
         </td>
+        <td>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-outline-@(item.Reply==true?"primary":"danger")" data-toggle="modal" data-target="#exampleModal" onclick="mailLoad('@item.Name','@item.Email','@item.Subject',@item.Id)">
+                @(item.Reply==true?"Yanıtlandı":"Yanıtla")
+            </button>
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Email Cevap</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/advert/sendMail" method="post">
+                                <input type="hidden" name="Id" id="MailId" value="" />
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="senderName" name="name" value="" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="email" class="form-control" id="senderEmail" name="email" value="" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="senderSubject" name="subject" value="" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12  mt-2">
+                                    <div class="form-group">
+                                        <textarea class="form-control" placeholder="Mesajınız" name="Message" style="height: 150px"></textarea>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                                    <button type="submit" class="btn btn-primary toastrDefaultSuccess">Yanıtla</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+          
+
+        </td>
     </tr>
 }
+
+<script>
+    function mailLoad(name, email, subject, id) {
+        console.log(id)
+        document.getElementById("senderName").value = name;
+        document.getElementById("senderEmail").value = email;
+        document.getElementById("senderSubject").value = subject;
+        document.getElementById("MailId").value = id;
+    }
+</script>
