@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Login";
+    Layout = null;
+}
+@await Component.InvokeAsync("_LayoutHeaderViewComponentPartial")
+<div class="row mt-5 mb-5">
+
+    <div class="col-4 offset-4">
+        <div class="login-box">
+            <!-- /.login-logo -->
+            <div class="card card-outline card-primary">
+                <div class="card-header text-center">
+                    <a href="../../index2.html"><h1 class="m-0 text-primary"> <b>Emlak</b>Plus</h1></a>
+                </div>
+                <div class="card-body">
+                    <p class="login-box-msg">Giriş Yapınız</p>
+
+                    <form action="/Account/Login" method="post">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">@@</span>
+                            <input type="email" name="email" class="form-control" placeholder="Email">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></span>
+                            <input type="password" name="pass" class="form-control" placeholder="Şifre">
+                        </div>
+                        <div class="row">
+                            <!-- /.col -->
+                            <div class="col-4">
+                                <button type="submit" class="btn btn-primary btn-block">Giriş Yap</button>
+                            </div>
+                            <div class="col-4 offset-4 d-flex justify-content-end">
+                                <a href="forgot-password.html">Şifremi unuttum</a>
+                            </div>
+                          
+                            <!-- /.col -->
+                        </div>
+                    </form>
+                    <!-- /.social-auth-links -->
+
+                   
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+
+</div>
+

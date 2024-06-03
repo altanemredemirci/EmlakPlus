@@ -54,8 +54,6 @@ builder.Services.Configure<IdentityOptions>(options =>
 
 });
 
-
-
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/Account/Login";
@@ -69,7 +67,6 @@ builder.Services.ConfigureApplicationCookie(options =>
         Name = ".EmlakPlus.Security.Cookie"
     };
 });
-
 
 
 //Dependency Injection
@@ -129,7 +126,7 @@ app.UseAuthorization(); //Yetkilendirme
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Admin}/{action=Index}/{id?}");
+    pattern: "{controller=Account}/{action=Login}/{id?}");
 
 
 
