@@ -33,6 +33,45 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddDefaultTokenProviders();
 
 
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.Password.RequireDigit = true;          //Rakam olsun
+    options.Password.RequireNonAlphanumeric = true;//Özel karakter olsun(*,?,-,..)
+    options.Password.RequiredLength = 6;
+    options.Password.RequireUppercase = true;
+    options.Password.RequireLowercase = true;
+
+    options.Lockout.MaxFailedAccessAttempts = 5;
+    options.Lockout.AllowedForNewUsers = true;
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+
+
+    options.User.RequireUniqueEmail = true;
+    //options.User.AllowedUserNameCharacters = " ";
+
+    options.SignIn.RequireConfirmedPhoneNumber = false;
+    options.SignIn.RequireConfirmedEmail = false;
+
+});
+
+
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Account/Login";
+    options.LogoutPath = "/Account/Logout";
+    options.AccessDeniedPath = "/Account/AccessDenied";
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+    options.SlidingExpiration = true;
+    options.Cookie = new CookieBuilder
+    {
+        HttpOnly = true,
+        Name = ".EmlakPlus.Security.Cookie"
+    };
+});
+
+
+
 //Dependency Injection
 
 builder.Services.AddScoped<IProductService, ProductManager>();
