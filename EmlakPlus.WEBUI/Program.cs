@@ -3,7 +3,10 @@ using EmlakPlus.BLL.Concrete;
 using EmlakPlus.DAL.Abstract;
 using EmlakPlus.DAL.Concrete.EfCore;
 using EmlakPlus.WEBUI.Hubs;
+using EmlakPlus.WEBUI.Identity;
 using EmlakPlus.WEBUI.Mapping;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileSystemGlobbing.Internal;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +24,14 @@ builder.Services.AddCors(opt =>
     ));
 
 builder.Services.AddSignalR();
+
+builder.Services.AddDbContext<ApplicationIdentityDbContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection")));
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationIdentityDbContext>()
+    .AddDefaultTokenProviders();
+
 
 //Dependency Injection
 
@@ -72,10 +83,10 @@ if (!app.Environment.IsDevelopment())
 app.UseCors();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseAuthentication(); //Kimliklendirme
 app.UseRouting();
 
-app.UseAuthorization();
+app.UseAuthorization(); //Yetkilendirme
 
 app.MapControllerRoute(
     name: "default",
