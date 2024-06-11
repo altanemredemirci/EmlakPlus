@@ -31,6 +31,14 @@ namespace EmlakPlus.API.Controllers
             return Ok(values);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> CreateProduct(ProductDetail entity)
+        {
+            var result = await _productRepository.CreateProductAsync(entity);
+
+            return Ok();
+        }
+
         [HttpPut]
         public async Task<IActionResult> UpdateProduct(ProductDetail entity)
         {

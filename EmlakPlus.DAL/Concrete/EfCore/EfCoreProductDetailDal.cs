@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,6 +12,18 @@ namespace EmlakPlus.DAL.Concrete.EfCore
 {
     public class EfCoreProductDetailDal : EfCoreGenericRepository<ProductDetail, DataContext>, IProductDetailDal
     {
+        public override List<ProductDetail> GetAll(Expression<Func<ProductDetail, bool>> filter)
+        {
+            using (var context = new DataContext())
+            {
+                var products = context.ProductDetail.Include(i => i.Product).ThenInclude(i => i.ProductType).Include(i => i.Product.City).Include(i => i.Product.Agency).Include("Images").AsQueryable();
+
+                return filter != null
+                    ? products.Where(filter).ToList()
+                    : products.ToList();
+            }
+        }
+
         public override ProductDetail GetById(int id)
         {
             using (var context = new DataContext())

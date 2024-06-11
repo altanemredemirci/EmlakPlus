@@ -1,4 +1,4 @@
-﻿@model List<ResultProductDTO>
+﻿@model List<ResultProductDetailDTO>
 @{
     string ConvertPrice(decimal price)
     {
@@ -11,19 +11,19 @@
         <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
             <div class="property-item rounded overflow-hidden">
                 <div class="position-relative overflow-hidden">
-                    <a href="/Home/ProductDetail/@item.Id"><img class="img-fluid" src="~/img/@item.CoverImage" alt=""></a>
-                    <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">@item.Type</div>
-                    <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">@item.ProductType.Name</div>
+                    <a href="/Home/ProductDetail/@item.Product.Id"><img class="img-fluid" src="~/img/@item.Product.CoverImage" alt=""></a>
+                    <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">@item.Product.Type</div>
+                    <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">@item.Product.ProductType.Name</div>
                 </div>
                 <div class="p-4 pb-0">
-                    <h5 class="text-primary mb-3">@ConvertPrice(item.Price)</h5>
-                    <a class="d-block h5 mb-2" href="/Home/ProductDetail/@item.Id">@item.Title</a>
-                    <p><i class="fa fa-map-marker-alt text-primary me-2"></i>@item.Address, @item.District, İstanbul</p>
+                    <h5 class="text-primary mb-3">@ConvertPrice(item.Product.Price)</h5>
+                    <a class="d-block h5 mb-2" href="/Home/ProductDetail/@item.Product.Id">@item.Product.Title</a>
+                    <p><i class="fa fa-map-marker-alt text-primary me-2"></i>@item.Product.Address, @item.Product.District, @item.Product.City.Name</p>
                 </div>
                 <div class="d-flex border-top">
-                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>1000 Sqft</small>
-                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>3 Bed</small>
-                    <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>
+                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>@item.Size</small>
+                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>@item.BedRoomCount Yatak Odası</small>
+                    <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>@item.BathCount Banyo</small>
                 </div>
             </div>
         </div>

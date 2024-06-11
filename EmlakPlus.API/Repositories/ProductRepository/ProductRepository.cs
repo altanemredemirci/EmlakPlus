@@ -15,12 +15,17 @@ namespace EmlakPlus.API.Repositories.ProductRepository
 
         public async Task<int> CreateProductAsync(ProductDetail productDetail)
         {
-            throw new NotImplementedException();
+            await _estateContext.ProductDetail.AddAsync(productDetail);
+
+            return await _estateContext.SaveChangesAsync();
         }
 
         public async Task<int> DeleteProductAsync(int id)
         {
-            throw new NotImplementedException();
+            var model = _estateContext.Products.Find(id);
+            _estateContext.Products.Remove(model);
+
+            return await _estateContext.SaveChangesAsync();
         }
 
         public async Task<List<Product>> GetAllAsync()
