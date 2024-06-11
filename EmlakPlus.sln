@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmlakPlus.WEBUI", "EmlakPlus.WEBUI\EmlakPlus.WEBUI.csproj", "{B6683398-90CB-4F9C-B919-3B3A04BD23F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmlakPlus.WEBUI", "EmlakPlus.WEBUI\EmlakPlus.WEBUI.csproj", "{B6683398-90CB-4F9C-B919-3B3A04BD23F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmlakPlus.Entity", "EmlakPlus.Entity\EmlakPlus.Entity.csproj", "{663E54CF-59AE-431C-90E4-1FA38EA26D64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmlakPlus.Entity", "EmlakPlus.Entity\EmlakPlus.Entity.csproj", "{663E54CF-59AE-431C-90E4-1FA38EA26D64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmlakPlus.DAL", "EmlakPlus.DAL\EmlakPlus.DAL.csproj", "{3C6E612D-D303-4F5B-8496-83AA0C497474}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmlakPlus.DAL", "EmlakPlus.DAL\EmlakPlus.DAL.csproj", "{3C6E612D-D303-4F5B-8496-83AA0C497474}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmlakPlus.BLL", "EmlakPlus.BLL\EmlakPlus.BLL.csproj", "{7216E3F0-BBCA-4E9C-8AD4-181C57D025A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmlakPlus.BLL", "EmlakPlus.BLL\EmlakPlus.BLL.csproj", "{7216E3F0-BBCA-4E9C-8AD4-181C57D025A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmlakPlus.API", "EmlakPlus.API\EmlakPlus.API.csproj", "{9B580CD2-ACCA-44EC-A597-D40A30AB4A60}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{7216E3F0-BBCA-4E9C-8AD4-181C57D025A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7216E3F0-BBCA-4E9C-8AD4-181C57D025A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7216E3F0-BBCA-4E9C-8AD4-181C57D025A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B580CD2-ACCA-44EC-A597-D40A30AB4A60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B580CD2-ACCA-44EC-A597-D40A30AB4A60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B580CD2-ACCA-44EC-A597-D40A30AB4A60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B580CD2-ACCA-44EC-A597-D40A30AB4A60}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

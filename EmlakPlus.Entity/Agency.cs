@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace EmlakPlus.Entity
@@ -38,8 +39,7 @@ namespace EmlakPlus.Entity
 
         public bool Status { get; set; }
 
-        public int UserId { get; set; }
-
+        [JsonIgnore]
         public List<Product> Products { get; set; }
         public List<Mail> Mails { get; set; }
     }

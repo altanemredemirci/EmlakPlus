@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EmlakPlus.WEBUI.Controllers
 {
-    [Authorize]
     public class AdminController : Controller
     {
         public IActionResult Index()

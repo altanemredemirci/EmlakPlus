@@ -3,7 +3,6 @@ using EmlakPlus.BLL.Concrete;
 using EmlakPlus.DAL.Abstract;
 using EmlakPlus.DAL.Concrete.EfCore;
 using EmlakPlus.WEBUI.Hubs;
-using EmlakPlus.WEBUI.Identity;
 using EmlakPlus.WEBUI.Mapping;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -24,50 +23,6 @@ builder.Services.AddCors(opt =>
     ));
 
 builder.Services.AddSignalR();
-
-builder.Services.AddDbContext<ApplicationIdentityDbContext>(options =>
-options.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection")));
-
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-    .AddEntityFrameworkStores<ApplicationIdentityDbContext>()
-    .AddDefaultTokenProviders();
-
-
-builder.Services.Configure<IdentityOptions>(options =>
-{
-    options.Password.RequireDigit = true;          //Rakam olsun
-    options.Password.RequireNonAlphanumeric = true;//Özel karakter olsun(*,?,-,..)
-    options.Password.RequiredLength = 6;
-    options.Password.RequireUppercase = true;
-    options.Password.RequireLowercase = true;
-
-    options.Lockout.MaxFailedAccessAttempts = 5;
-    options.Lockout.AllowedForNewUsers = true;
-    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-
-
-    options.User.RequireUniqueEmail = true;
-    //options.User.AllowedUserNameCharacters = " ";
-
-    options.SignIn.RequireConfirmedPhoneNumber = false;
-    options.SignIn.RequireConfirmedEmail = false;
-
-});
-
-builder.Services.ConfigureApplicationCookie(options =>
-{
-    options.LoginPath = "/Account/Login";
-    options.LogoutPath = "/Account/Logout";
-    options.AccessDeniedPath = "/Account/AccessDenied";
-    options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
-    options.SlidingExpiration = true;
-    options.Cookie = new CookieBuilder
-    {
-        HttpOnly = true,
-        Name = ".EmlakPlus.Security.Cookie"
-    };
-});
-
 
 //Dependency Injection
 
@@ -119,14 +74,14 @@ if (!app.Environment.IsDevelopment())
 app.UseCors();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-app.UseAuthentication(); //Kimliklendirme
+
 app.UseRouting();
 
 app.UseAuthorization(); //Yetkilendirme
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Account}/{action=Login}/{id?}");
+    pattern: "{controller=Admin}/{action=Index}/{id?}");
 
 
 
